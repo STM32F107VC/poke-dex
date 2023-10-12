@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: roboto;
+    background-color: rgb(122, 113, 113);
+    color: white;
+}
+
+/* Header section */
+.header {
+    justify-content: space-between;
+    padding: 16px 48px;
+}
+
+h1 {
+    font-size: 56px;
+}
+
+.input {
+    border: none;
+    height: 24px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 16px;
+}
+/* ----------------------------------------------- */
+
+
+#pokedex {
+    min-height: 50vh;
+    /* background-color: rgb(219, 33, 33); */
+    color: white;
+    display: flex;
+    padding: 24px;
+}
+
+.info-container {
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    /* background-color: white; */
+    border-top-right-radius: 48px;
+    border-top-left-radius: 48px;
+    min-height: 100px;
+    margin-top: -48px;
+}
+
+#pokemonImage {
+    /* position: absolute; */
+    margin-top: -256px;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Pseudo Classes */
+.margin-zero {
+    margin: 0;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
