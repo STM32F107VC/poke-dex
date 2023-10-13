@@ -1,9 +1,11 @@
-/* Declare variables */
+/* Declare global variables */
 let convertPokemonNames;
 let url;
-let getIdOfPokemon;
 let response;
-let getPokemonName
+let getPokemonName;
+let getIdOfPokemon;
+let getImgOfPokemon;
+
 
 /* Declare arrays */
 let currentPokemon = [];
@@ -44,11 +46,13 @@ let pokemonNames = [
     "Clefable",
     "Vulpix",
     "Ninetales"
-];
-let pokemonNamesLowerCase = [];
+]; // Auslagern
 let pokemonId = [];
+let pokemonImg = [];
+let cardBackgroundColor = [];
 
 function init() {
+    includeHTML();
     loadPokemon();
 }
 
@@ -58,18 +62,21 @@ async function loadPokemon() {
         const namesOfPokemons = pokemonNames[i];
         convertPokemonNames = namesOfPokemons.toLowerCase();
         pokemonNames[i] = convertPokemonNames;
-        // pokemonNamesLowerCase.push(convertPokemonNames);
-
-
         console.log('Der Name vom Pokemon lautet:', convertPokemonNames);
+
         url = ('https://pokeapi.co/api/v2/pokemon/' + convertPokemonNames);
         response = await fetch(url);
         currentPokemon = await response.json();
         getPokemonName = currentPokemon['name'];
         getIdOfPokemon = currentPokemon['id'];
+        getImgOfPokemon = currentPokemon['sprites']['front_shiny'];
         pokemonId.push(getIdOfPokemon);
+        pokemonImg.push(getImgOfPokemon);
+        cardBackgroundColor.push(currentPokemon['game_indices'][1]['version']['name']);
         console.log('Loaded Pokémon', currentPokemon);
+        renderPokemonCards(i);
     }
+
     // renderPokemonInfo(currentPokemon);
 }
 
@@ -79,3 +86,20 @@ async function loadPokemon() {
 //     document.getElementById('pokemonName').innerHTML = `${name}`;
 //     document.getElementById('pokemonImage').src = `${imgPath}`;
 // }
+
+/* Render pokemon card */
+function renderPokemonCards(i) {
+    let renderPokemonCards = document.getElementById('pokedex');
+    renderPokemonCards.innerHTML += /*html*/`
+       <div id="card${i}" class="poke-card">
+           <div id="IdOfPokemon" class="p-around-8">#${pokemonId[i]}</div>
+           <div id="nameOfPokemon">${pokemonNames[i].toUpperCase()}</div>
+            <div class="flex space-betw">
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div id="imgPokemon"><img src="${pokemonImg[i]}" alt="pokemon"></div>
+            </div>
+       </div>`;
+}
