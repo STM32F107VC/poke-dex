@@ -7,8 +7,8 @@ body {
 
 /* Header section */
 .header {
-    justify-content: space-between;
-    padding: 16px 48px;
+    justify-content: space-around;
+    padding: 16px 24px;
 }
 
 h1 {
@@ -22,13 +22,11 @@ h1 {
     padding: 4px;
     font-size: 16px;
 }
-/* ----------------------------------------------- */
+/* ---------------------------------------------- */
 
-
+/* Content container with pokemon cards */
 #pokedex {
-    /* width: 100vw; */
     min-height: 50vh;
-    /* background-color: rgb(219, 33, 33); */
     color: white;
     display: flex;
     justify-content: center;
@@ -36,24 +34,7 @@ h1 {
     padding: 24px;
     gap: 16px;
 }
-
-.info-container {
-    /* position: relative; */
-    display: flex;
-    justify-content: center;
-    border-top-right-radius: 48px;
-    border-top-left-radius: 48px;
-    min-height: 100px;
-    margin-top: -48px;
-}
-
-#pokemonImage {
-    /* position: absolute; */
-    margin-top: -256px;
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-}
+/* ---------------------------------------------- */
 
 /* Pseudo Classes */
 .margin-zero {
@@ -72,6 +53,7 @@ h1 {
 .space-betw {
     justify-content: space-between;
 }
+/* ---------------------------------------------- */
 
 /* Style the pokemon cards */
 .poke-card {
@@ -87,6 +69,11 @@ h1 {
 
 #nameOfPokemon {
     font-size: 22px;
+}
+
+.img-size {
+    width: 96px;
+    height: 96px;
 }
 
 /* Define background color depending on pokemon types */
