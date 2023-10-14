@@ -50,6 +50,10 @@ h1 {
     align-items: center;
 }
 
+.flex-column {
+    flex-direction: column;
+}
+
 .space-betw {
     justify-content: space-between;
 }
@@ -58,7 +62,7 @@ h1 {
 /* Style the pokemon cards */
 .poke-card {
     width: 200px;
-    /* background-color: rgb(219, 33, 33); */
+    height: 150px;
     padding: 22px;
     border-radius: 22px;
 }
@@ -75,6 +79,20 @@ h1 {
     width: 96px;
     height: 96px;
 }
+
+.bgc-transparent { 
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.type-information {
+    border-radius: 8px;
+    margin-top: 2px;
+    width: 70px;
+    text-align: center;
+}
+
+
+
 
 /* Define background color depending on pokemon types */
 .bgc-fighting { background-color: #CE3F6B; }

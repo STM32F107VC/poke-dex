@@ -9,10 +9,9 @@ let getFirstTypeOfPokemon;
 let getSecondTypeOfPokemon;
 
 
+
 /* Declare arrays */
 let currentPokemon = [];
-
-/* Outsource */
 let pokemonNames = [
     "Bulbasaur",
     "Ivysaur",
@@ -24,86 +23,86 @@ let pokemonNames = [
     "Wartortle",
     "Blastoise",
     "Caterpie",
-    "Metapod"
-    // "Butterfree",
-    // "Weedle",
-    // "Kakuna",
-    // "Beedrill",
-    // "Pidgey",
-    // "Pidgeotto",
-    // "Pidgeot",
-    // "Rattata",
-    // "Raticate",
-    // "Spearow",
-    // "Fearow",
-    // "Ekans",
-    // "Arbok",
-    // "Pikachu",
-    // "Raichu",
-    // "Sandshrew",
-    // "Sandslash",
-    // "Nidorina",
-    // "Nidoqueen",
-    // "Nidorino",
-    // "Nidoking",
-    // "Clefairy",
-    // "Clefable",
-    // "Vulpix",
-    // "Ninetales",
-    // "Jigglypuff",
-    // "Wigglytuff",
-    // "Zubat",
-    // "Golbat",
-    // "Oddish",
-    // "Gloom",
-    // "Vileplume",
-    // "Paras",
-    // "Parasect",
-    // "Venonat",
-    // "Venomoth",
-    // "Diglett",
-    // "Dugtrio",
-    // "Meowth",
-    // "Persian",
-    // "Psyduck",
-    // "Golduck",
-    // "Mankey",
-    // "Primeape",
-    // "Growlithe",
-    // "Arcanine",
-    // "Poliwag",
-    // "Poliwhirl",
-    // "Poliwrath",
-    // "Abra",
-    // "Kadabra",
-    // "Alakazam",
-    // "Machop",
-    // "Machoke",
-    // "Machamp",
-    // "Bellsprout",
-    // "Weepinbell",
-    // "Victreebel",
-    // "Tentacool",
-    // "Tentacruel",
-    // "Geodude",
-    // "Graveler",
-    // "Golem",
-    // "Ponyta",
-    // "Rapidash",
-    // "Slowpoke",
-    // "Slowbro",
-    // "Magnemite",
-    // "Magneton",
-    // "Farfetch'd",
-    // "Doduo",
-    // "Dodrio",
-    // "Seel",
-    // "Dewgong",
-    // "Grimer",
-    // "Muk",
-    // "Shellder",
-    // "Cloyster",
-    // "Gastly",
+    "Metapod",
+    "Butterfree",
+    "Weedle",
+    "Kakuna",
+    "Beedrill",
+    "Pidgey",
+    "Pidgeotto",
+    "Pidgeot",
+    "Rattata",
+    "Raticate",
+    "Spearow",
+    "Fearow",
+    "Ekans",
+    "Arbok",
+    "Pikachu",
+    "Raichu",
+    "Sandshrew",
+    "Sandslash",
+    "Nidorina",
+    "Nidoqueen",
+    "Nidorino",
+    "Nidoking",
+    "Clefairy",
+    "Clefable",
+    "Vulpix",
+    "Ninetales",
+    "Jigglypuff",
+    "Wigglytuff",
+    "Zubat",
+    "Golbat",
+    "Oddish",
+    "Gloom",
+    "Vileplume",
+    "Paras",
+    "Parasect",
+    "Venonat",
+    "Venomoth",
+    "Diglett",
+    "Dugtrio",
+    "Meowth",
+    "Persian",
+    "Psyduck",
+    "Golduck",
+    "Mankey",
+    "Primeape",
+    "Growlithe",
+    "Arcanine",
+    "Poliwag",
+    "Poliwhirl",
+    "Poliwrath",
+    "Abra",
+    "Kadabra",
+    "Alakazam",
+    "Machop",
+    "Machoke",
+    "Machamp",
+    "Bellsprout",
+    "Weepinbell",
+    "Victreebel",
+    "Tentacool",
+    "Tentacruel",
+    "Geodude",
+    "Graveler",
+    "Golem",
+    "Ponyta",
+    "Rapidash",
+    "Slowpoke",
+    "Slowbro",
+    "Magnemite",
+    "Magneton",
+    "Farfetch'd",
+    "Doduo",
+    "Dodrio",
+    "Seel",
+    "Dewgong",
+    "Grimer",
+    "Muk",
+    "Shellder",
+    "Cloyster",
+    "Gastly",
     // "Haunter",
     // "Gengar",
     // "Onix",
@@ -666,11 +665,11 @@ let pokemonNames = [
     // "Pyroar",
 ];
 let compareBackgroundColor = ['fighting', 'psychic', 'poison', 'dragon', 'ghost', 'dark', 'ground', 'fire', 'fairy', 'water', 'flying', 'normal', 'rock', 'electric', 'bug', 'grass', 'ice', 'steel'];
-/* Outsource */
 
 let pokemonId = [];
 let pokemonImg = [];
 let cardBackgroundColor = [];
+let secondTypeOfPokemon = [];
 
 /* JSON with pokemon types for changing cards background color */
 const typeColors = {
@@ -716,11 +715,25 @@ async function loadPokemon() {
     }
 }
 
+/* Get specific pokemon values */
 function getPokemonJsonValues(currentPokemon) {
     getPokemonName = currentPokemon['name'];
     getIdOfPokemon = currentPokemon['id'];
-    getImgOfPokemon = currentPokemon['sprites']['front_shiny'];
+    getImgOfPokemon = currentPokemon['sprites']['front_default'];
     getFirstTypeOfPokemon = currentPokemon['types'][0]['type']['name'];
+
+
+
+    // getSecondTypeOfPokemon = currentPokemon['types'][1]['type']['name'];
+    if (currentPokemon['types'][1] === undefined) {
+        console.log('Array existiert nicht.');
+        getSecondTypeOfPokemon = '';
+    } else {
+        console.log('Array existiert.');
+        getSecondTypeOfPokemon = currentPokemon['types'][1]['type']['name'];
+    }
+
+
     pokemonId.push(getIdOfPokemon);
     pokemonImg.push(getImgOfPokemon);
     cardBackgroundColor.push(getFirstTypeOfPokemon);
@@ -730,21 +743,26 @@ function getPokemonJsonValues(currentPokemon) {
 /* Get pokedex container to render in all pokemon cards */
 function renderPokemonCards(i) {
     let renderPokemonCards = document.getElementById('pokedex');
-    let typeOfPokemon = getFirstTypeOfPokemon[0].toUpperCase() + getFirstTypeOfPokemon.slice(1);
-    renderPokemonCards.innerHTML += renderCard(i, typeOfPokemon);
+    let typeOneOfPokemon = getFirstTypeOfPokemon[0].toUpperCase() + getFirstTypeOfPokemon.slice(1);
+    let typeTwoOfPokemon = getSecondTypeOfPokemon;//.toUpperCase() + getSecondTypeOfPokemon.slice(1)
+    renderPokemonCards.innerHTML += renderCard(i, typeOneOfPokemon, typeTwoOfPokemon);
+    if (typeTwoOfPokemon == '') {
+        document.getElementById(`pokemonTypeTwo${i}`).classList.remove('bgc-transparent', 'type-information');
+    }
     setBackgroundColor(i);
 }
 
 /* Render pokemon card content */
-function renderCard(i, typeOfPokemon) {
+function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
+
     return /*html*/`
     <div id="card${i}" class="poke-card" onclick="openPokemonInfoCard()">
         <div id="IdOfPokemon" class="p-around-8">#${pokemonId[i]}</div>
         <div id="nameOfPokemon">${pokemonNames[i].toUpperCase()}</div >
         <div class="flex space-betw">
-            <div>
-                <div id="pokemonType1">${typeOfPokemon}</div>
-                <div id="pokemonType2"></div>
+            <div id="type-container" class="flex flex-column">
+                <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
+                <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
             </div>
             <div id="imgPokemon"><img class="img-size" src="${pokemonImg[i]}" alt="pokemon"></div>
         </div>
@@ -756,13 +774,13 @@ function renderCard(i, typeOfPokemon) {
 function openPokemonInfoCard() {
     console.log('Informationen abrufen');
     let infoContainer = document.getElementById('info-container');
-    infoContainer.innerHTML = renderInfoCard();
+    // infoContainer.innerHTML = renderInfoCard();
 }
 
-function renderInfoCard() {
-    return /*html*/`
-    `;
-}
+// function renderPokemonInfoCard() {
+//     return /*html*/`
+//     `;
+// }
 
 /* Set background-color of pokemon card depending on pokemon type */
 function setBackgroundColor(i) {
