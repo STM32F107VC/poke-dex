@@ -754,7 +754,6 @@ function renderPokemonCards(i) {
 
 /* Render pokemon card content */
 function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
-
     return /*html*/`
     <div id="card${i}" class="poke-card" onclick="openPokemonInfoCard()">
         <div id="IdOfPokemon" class="p-around-8">#${pokemonId[i]}</div>
