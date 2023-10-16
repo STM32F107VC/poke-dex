@@ -33,13 +33,19 @@ a {
 /* Pseudo Classes */
 .margin-zero { margin: 0; }
 
+.margin-top-minus-48px { margin-top: -48px; }
+
 .margin-left-2px { margin-left: 2px; }
+
+.margin-left-22px { margin-left: 22px; }
 
 .p-around-8px { padding: 8px; }
 
 .p-around-4px { padding: 4px; }
 
 .p-around-22px { padding: 22px; }
+
+.p-lf-8px { padding: 0 8px; }
 
 .flex {
     display: flex;

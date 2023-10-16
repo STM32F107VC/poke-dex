@@ -9,8 +9,9 @@ let getFirstTypeOfPokemon;
 let getSecondTypeOfPokemon;
 let typeOneOfPokemon;
 let typeTwoOfPokemon;
-
-
+let getHeight;
+let getWeight;
+let getAbiliy;
 /* Declare arrays */
 let currentPokemon = [];
 let pokemonNames = [
@@ -671,7 +672,9 @@ let pokemonId = [];
 let pokemonImg = [];
 let cardBackgroundColor = [];
 let secondTypeOfPokemon = [];
-
+let height = [];
+let weight = [];
+let ability = [];
 /* JSON with pokemon types for changing cards background color */
 const typeColors = {
     fighting: 'bgc-fighting',
@@ -722,16 +725,20 @@ function getPokemonJsonValues(currentPokemon) {
     getIdOfPokemon = currentPokemon['id'];
     getImgOfPokemon = currentPokemon['sprites']['front_default'];
     getFirstTypeOfPokemon = currentPokemon['types'][0]['type']['name'];
+    getHeight = currentPokemon['height'];
+    height.push(getHeight);
+    getWeight = (currentPokemon['weight'] / 10).toFixed(0);
+    weight.push(getWeight);
+    getAbiliy = currentPokemon['abilities'][0]['ability']['name'];
+    ability.push(getAbiliy);
     pokemonId.push(getIdOfPokemon);
     pokemonImg.push(getImgOfPokemon);
     cardBackgroundColor.push(getFirstTypeOfPokemon);
     console.log('Loaded Pokémon', currentPokemon);
     if (currentPokemon['types'][1] === undefined) {
-        console.log('Array existiert nicht.');
         getSecondTypeOfPokemon = '';
         secondTypeOfPokemon.push(getSecondTypeOfPokemon);
     } else {
-        console.log('Array existiert.');
         getSecondTypeOfPokemon = currentPokemon['types'][1]['type']['name'].toUpperCase();
         secondTypeOfPokemon.push(getSecondTypeOfPokemon);
     }
@@ -789,7 +796,7 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
         <div id="info-card-top${i}" class="info-top-div p-around-8px"> 
             <div class="flex space-betw p-around-8px">
                 <div onclick="removeInfoCard(${i})"><img class="icon-size p-around-4px" src="img/icons_back.png" alt="escape"></div>
-                <div><img class="icon-size p-around-4px" src="img/icons8-heart-50.png" alt="escape"></div>
+                <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px" src="img/icons8-heart-50.png" alt="escape"></div>
             </div>
             <div class="flex space-betw p-around-8px">
                 <div class="flex flex-column">
@@ -805,7 +812,7 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
 
         <div class="inner-info-bottomDiv">
             <div class="flex center"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
-            <div class="flex space-betw p-around-8px">
+            <div class="flex space-betw p-around-8px margin-top-minus-48px">
                 <img id="previousPicture" class="icon-size p-around-4px" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
                 <img id="nextPicture" class="icon-size p-around-4px" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
             </div>
@@ -815,7 +822,12 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
                     <a class="p-around-8px text-style" href="#">BASE STATS</a>
                 </div>
             </div>
-            <div id="pokemonAbout"></div>
+            <div id="pokemonAbout" class="p-around-8px">
+                <div class="p-lf-8px"><span>Height</span>&nbsp;<span class="margin-left-22px">${height[i]}"</span></div>
+                <div class="p-lf-8px"><span>Weight</span>&nbsp;<span class="margin-left-22px"></span>${weight[i]}kg</div>
+                <div class="p-lf-8px"><span>Ability</span>&nbsp;&nbsp;<span class="margin-left-22px"></span>${ability[i]}</div>
+            </div>
+            <div id="pokemonBaseStats"></div>
         </div>
     </div>`;
 }
@@ -839,10 +851,8 @@ function setBackgroundColor(i, k) {
     } else { card.classList.add(bgColorClass); }
 }
 
-
 // Go to previous picture
 function previousImg(i) {
-    console.log('Du bist in die previousImg() Funktion eingetreten');
     if (!(i <= (pokemonNames.length - pokemonNames.length))) { // Check that i isn't smaller than array length
         i -= 1;
         openPokemonInfoCard(i);
@@ -852,7 +862,6 @@ function previousImg(i) {
 
 // Go to next picture
 function nextImg(i) {
-    console.log('Du bist in die nextImg() Funktion eingetreten');
     if (i < pokemonNames.length - 1) { // Check that i isn't bigger than array length 
         i += 1;
         openPokemonInfoCard(i);
@@ -870,4 +879,18 @@ function removeArrowLeft(leftArrow) {
 function removeArrowRight(rightArrow) {
     let arrowBehindNext = document.getElementById('nextPicture');
     if (rightArrow) { arrowBehindNext.classList.add('hideArrow'); }
+}
+
+/* Add red heart for like */
+function addReadHeart(i) {
+    let heart = document.getElementById(`heart${i}`);
+    heart.innerHTML = '';
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="removeRedHeart(${i})" src ="img/icons8-heart-50-filled.png" alt="red heart">`;
+}
+
+/* Remove red heart for dislike */
+function removeRedHeart(i) {
+    let heart = document.getElementById(`heart${i}`);
+    heart.innerHTML = '';
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="addReadHeart(${i})" src ="img/icons8-heart-50.png" alt="like">`;
 }
