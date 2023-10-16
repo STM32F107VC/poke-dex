@@ -806,8 +806,8 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
         <div class="inner-info-bottomDiv">
             <div class="flex center"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
             <div class="flex space-betw p-around-8px">
-                <img class="icon-size p-around-4px" src="img/icons8-back-26.png" alt="backward">
-                <img class="icon-size p-around-4px" src="img/icons8-forward-26.png" alt="forward">
+                <img id="previousPicture" class="icon-size p-around-4px" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
+                <img id="nextPicture" class="icon-size p-around-4px" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
             </div>
             <div>
                 <div class="flex center">
@@ -815,9 +815,7 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
                     <a class="p-around-8px text-style" href="#">BASE STATS</a>
                 </div>
             </div>
-            <div>
-
-            </div>
+            <div id="pokemonAbout"></div>
         </div>
     </div>`;
 }
@@ -838,8 +836,38 @@ function setBackgroundColor(i, k) {
     if (k) {
         k = false;
         infoCard.classList.add(bgColorClass);
-    } else {
-        card.classList.add(bgColorClass);
+    } else { card.classList.add(bgColorClass); }
+}
+
+
+// Go to previous picture
+function previousImg(i) {
+    console.log('Du bist in die previousImg() Funktion eingetreten');
+    if (!(i <= (pokemonNames.length - pokemonNames.length))) { // Check that i isn't smaller than array length
+        i -= 1;
+        openPokemonInfoCard(i);
+        if (i === (pokemonNames.length - pokemonNames.length)) { removeArrowLeft('leftArrow'); }
     }
 }
 
+// Go to next picture
+function nextImg(i) {
+    console.log('Du bist in die nextImg() Funktion eingetreten');
+    if (i < pokemonNames.length - 1) { // Check that i isn't bigger than array length 
+        i += 1;
+        openPokemonInfoCard(i);
+        if (i === pokemonNames.length - 1) { removeArrowRight('rightArrow'); }
+    }
+}
+
+// Hide left arrow if first picture is reached
+function removeArrowLeft(leftArrow) {
+    let arrowBehindPrevious = document.getElementById('previousPicture');
+    if (leftArrow) { arrowBehindPrevious.classList.add('hideArrow'); }
+}
+
+// Hide right arrow if last picture is reached
+function removeArrowRight(rightArrow) {
+    let arrowBehindNext = document.getElementById('nextPicture');
+    if (rightArrow) { arrowBehindNext.classList.add('hideArrow'); }
+}
