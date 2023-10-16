@@ -1,27 +1,45 @@
 body {
     margin: 0;
     font-family: roboto;
-    /* background-color: #222224; */
-    color: white;
+    scroll-behavior: smooth;
+    /* background: #222224; */
 }
 
 /* Change scrollbar design */
 ::-webkit-scrollbar {
     width: 15px;
     height: 15px;
-    }
-    ::-webkit-scrollbar-track-piece  { background-color: #f00000; }
-    ::-webkit-scrollbar-thumb:vertical {
-        height: 30px;
-        background-color: #222224;
-        border-radius: 22px;
+}
+::-webkit-scrollbar-track-piece  { 
+    background-color: #f00000;
+    border-bottom: none;
+    border-top: none; 
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 30px;
+    background-color: #222224;
+    border-radius: 22px;
 }
 /* ---------------------------------------------- */
+
+/* a-tags */
+a {
+    text-decoration: none;
+}
+/* ---------------------------------------------- */
+
+
 
 /* Pseudo Classes */
 .margin-zero { margin: 0; }
 
+.margin-left-2px { margin-left: 2px; }
+
 .p-around-8px { padding: 8px; }
+
+.p-around-4px { padding: 4px; }
+
+.p-around-22px { padding: 22px; }
 
 .flex {
     display: flex;
@@ -31,20 +49,70 @@ body {
 .flex-column { flex-direction: column; }
 
 .space-betw { justify-content: space-between; }
+
+.center { justify-content: center; }
+
+.text-style {
+    color: #222224;
+    font-weight: 700;
+}
+
+.font-size-28px {
+    font-size: 28px;
+}
+
+.border-small {
+    border: 0.5px solid #222224;   
+}
+
+.d-none {
+    display: none;
+}
+
+.set-to-background {
+    z-index: -1;
+}
+
+.icon-size {
+    width: 32px;
+    height: 32px;
+}
+
+.icon-size:hover {    
+    background-color: rgb(0, 0, 0, 0.1);
+    border-radius: 100%;
+}
 /* ---------------------------------------------- */
 
 /* Header section */
 .header {
+    position: sticky;
+    top: 0;
     height: 100px;
     justify-content: space-around;
     padding: 16px 24px;
     background-color: #f00000;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+}
+
+#home {
+    transition: transform 750ms ease-in-out;
+}
+
+#home:hover {
+    transform: rotate(360deg); 
 }
 
 h1 { font-size: 56px; }
 
 .input {
-    border: none;
     height: 24px;
     border-radius: 4px;
     padding: 4px;
@@ -58,7 +126,7 @@ h1 { font-size: 56px; }
     background-repeat: no-repeat;    
     background-attachment: fixed;
     background-size: cover;
-    /* min-height: 50vh; */
+    min-height: 50vh;
     color: white;
     display: flex;
     justify-content: center;
@@ -74,11 +142,18 @@ h1 { font-size: 56px; }
     height: 150px;
     padding: 22px;
     border-radius: 22px;
+    transition: transform 300ms ease-in-out;
 }
+
+/* .poke-card:hover {
+    transform: scale(1.1);
+} */
 
 #IdOfPokemon { text-align: right; }
 
-#nameOfPokemon { font-size: 22px; }
+#nameOfPokemon { 
+    font-size: 24px; 
+}
 
 .img-size {
     width: 96px;
@@ -90,6 +165,40 @@ h1 { font-size: 56px; }
     margin-top: 2px;
     width: 70px;
     text-align: center;
+    color: #222224;
+}
+/* ---------------------------------------------- */
+
+/* Style the pokemon info cards */
+#info-container {
+    /* background-color: rgba(0, 0, 0, 0.1); */
+    background-color: #222224;
+
+}
+
+.img-info-card-poke-size  {
+    width: 250px;
+    height: 250px;
+    margin-top: -100px;
+    image-rendering: pixelated;
+}
+
+.info-top-div {
+    border-radius: 22px 22px 48px 48px;
+    height: 45%;
+}
+
+.inner-info-container {
+    width: 400px;
+    height: 600px;
+    border-radius: 22px;
+    background-color: white;
+
+}
+
+.inner-info-bottomDiv {
+    border-radius: 22px;
+    width: 100%;
 }
 /* ---------------------------------------------- */
 
@@ -113,5 +222,5 @@ h1 { font-size: 56px; }
 .bgc-ice { background-color: #77d1c3; }
 .bgc-steel { background-color: #5B8EA1; }
 .bgc-default { background-color: silver; }
-.bgc-transparent { background-color: rgba(0, 0, 0, 0.05); }
+.bgc-transparent { background-color: rgba(0, 0, 0, 0.1); }
 /* ---------------------------------------------- */
