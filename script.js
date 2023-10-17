@@ -13,6 +13,7 @@ let typeTwoOfPokemon;
 let getHeight;
 let getWeight;
 let getAbiliy;
+let maxPixelWidth = 300;
 
 /* Declare arrays */
 let pokemonNames = [
@@ -33,7 +34,7 @@ let pokemonNames = [
     "Beedrill",
     "Pidgey",
     "Pidgeotto",
-    // "Pidgeot",
+    "Pidgeot",
     // "Rattata",
     // "Raticate",
     // "Spearow",
@@ -668,7 +669,6 @@ let pokemonNames = [
     // "Pyroar",
 ];
 let compareBackgroundColor = ['fighting', 'psychic', 'poison', 'dragon', 'ghost', 'dark', 'ground', 'fire', 'fairy', 'water', 'flying', 'normal', 'rock', 'electric', 'bug', 'grass', 'ice', 'steel'];
-
 let pokemonId = [];
 let pokemonImg = [];
 let cardBackgroundColor = [];
@@ -676,6 +676,13 @@ let secondTypeOfPokemon = [];
 let height = [];
 let weight = [];
 let ability = [];
+let calculatedHp = [];
+let calculatedAttack = [];
+let calculatedDefense = [];
+let calculatedSpecialAttack = [];
+let calculatedSpecialDefense = [];
+let calculatedSpeed = [];
+
 /* JSON with pokemon types for changing cards background color */
 const typeColors = {
     fighting: 'bgc-fighting',
@@ -717,6 +724,7 @@ async function loadPokemon() {
         console.log(currentPokemon);
         getPokemonJsonValuesPart1();
         getPokmonJSONValuesPart2();
+        getAndCalculateBaseStats();
         renderPokemonCards(i);
     }
 }
@@ -744,6 +752,16 @@ function getPokmonJSONValuesPart2() {
     ability.push(getAbiliy);
 }
 
+/* Get base stats values */
+function getAndCalculateBaseStats() {
+    calculatedHp.push(currentPokemon['stats'][0]['base_stat']);
+    calculatedAttack.push(currentPokemon['stats'][1]['base_stat']);
+    calculatedDefense.push(currentPokemon['stats'][2]['base_stat']);
+    calculatedSpecialAttack.push(currentPokemon['stats'][3]['base_stat']);
+    calculatedSpecialDefense.push(currentPokemon['stats'][4]['base_stat']);
+    calculatedSpeed.push(currentPokemon['stats'][5]['base_stat']);
+}
+
 /* Check if the second type array really exists */
 function checkExistingArray() {
     if (currentPokemon['types'][1] === undefined) {
@@ -765,7 +783,7 @@ function renderPokemonCards(i) {
     setBackgroundColor(i);
 }
 
-/* If there isn't a secon type, remove class list */
+/* If there isn't a second type, remove class list */
 function removeTypeTwoClasslist(i) {
     if (typeTwoOfPokemon === '') {
         document.getElementById(`pokemonTypeTwo${i}`).classList.remove('bgc-transparent', 'type-information');
@@ -817,7 +835,7 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
                 ${infoCardBottomSubdivFirst(i)}
                 ${infoCardBottomSubdivSecond()}
                 <div class="flex center">${infoCardBottomSubdivAbout(i)}</div>
-                <div>${infoCardBottomSubdivBaseStats(i)}</div>
+                <div class="flex flex-column flex-align-ites-start p-around-8px" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
             </div>
         </div>`;
 }
@@ -872,8 +890,8 @@ function infoCardBottomSubdivAbout(i) {
     return /*html*/`
         <div id="pokemonAbout" class="p-around-8px">
             <table>
-                <tr><td>Height:</td><td class="text-align-center">${height[i]}</td></tr>
-                <tr><td>Weight:</td><td class="text-align-center">${weight[i]}</td></tr>
+                <tr><td>Height:</td><td class="text-align-center">${height[i] / 10} m</td></tr>
+                <tr><td>Weight:</td><td class="text-align-center">${weight[i]} kg</td></tr>
                 <tr><td>Ability:</td><td class="text-align-center">${ability[i]}</td></tr>
             </table>
         </div>`;
@@ -881,7 +899,14 @@ function infoCardBottomSubdivAbout(i) {
 
 /* Pokemon info bottom-container bottom pokemon base-stats part */
 function infoCardBottomSubdivBaseStats(i) {
+    let maxPixelWidth = 130;
     return /*html*/`
+       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedHp[i] * 100 / maxPixelWidth}%">Hp</div>
+       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedAttack[i] * 100 / maxPixelWidth}%">Attack</div>
+       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedDefense[i] * 100 / maxPixelWidth}%">Defense</div> 
+       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedSpecialAttack[i] * 100 / maxPixelWidth}%">Special Attack</div>
+       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedSpecialDefense[i] * 100 / maxPixelWidth}%">Special Defense</div>
+       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedSpeed[i] * 100 / maxPixelWidth}%">Speed</div>
     `;
 }
 
@@ -903,6 +928,15 @@ function setBackgroundColor(i, k) {
         infoCard.classList.add(bgColorClass);
     } else { card.classList.add(bgColorClass); }
 }
+
+/* Set background color of bars */
+function setBarsBackgroundColor(i) {
+    let getBackgroundColor = cardBackgroundColor[i];
+    let bgColorClass = typeColors[getBackgroundColor] || 'bgc-default';
+    let bars = document.getElementById('base-stats');
+    bars.children.classList.add(bgColorClass);
+}
+
 
 // Go to previous picture
 function previousImg(i) {

@@ -39,6 +39,8 @@ a {
 
 .margin-left-22px { margin-left: 22px; }
 
+.margin-bottom-2px { margin-bottom: 2px; }
+
 .p-around-8px { padding: 8px; }
 
 .p-around-4px { padding: 4px; }
@@ -50,6 +52,10 @@ a {
 .flex {
     display: flex;
     align-items: center;
+}
+
+.flex-align-ites-start {
+    align-items: flex-start;
 }
 
 .flex-column { flex-direction: column; }
@@ -240,4 +246,5 @@ td:nth-of-type(2) {
 .bgc-steel { background-color: #5B8EA1; }
 .bgc-default { background-color: silver; }
 .bgc-transparent { background-color: rgba(0, 0, 0, 0.1); }
+.bgc-bars-diagram { background-color: #888891; }
 /* ---------------------------------------------- */
