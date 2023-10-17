@@ -2,6 +2,7 @@
 let convertPokemonNames;
 let url;
 let response;
+let currentPokemon;
 let getPokemonName;
 let getIdOfPokemon;
 let getImgOfPokemon;
@@ -12,8 +13,8 @@ let typeTwoOfPokemon;
 let getHeight;
 let getWeight;
 let getAbiliy;
+
 /* Declare arrays */
-let currentPokemon = [];
 let pokemonNames = [
     "Bulbasaur",
     "Ivysaur",
@@ -714,27 +715,37 @@ async function loadPokemon() {
         response = await fetch(url);
         currentPokemon = await response.json();
         console.log(currentPokemon);
-        getPokemonJsonValues(currentPokemon);
+        getPokemonJsonValuesPart1();
+        getPokmonJSONValuesPart2();
         renderPokemonCards(i);
     }
 }
 
-/* Get specific pokemon values */
-function getPokemonJsonValues(currentPokemon) {
+/* Get specific pokemon out of Poke API JSON part 1 */
+function getPokemonJsonValuesPart1() {
     getPokemonName = currentPokemon['name'];
     getIdOfPokemon = currentPokemon['id'];
+    pokemonId.push(getIdOfPokemon);
     getImgOfPokemon = currentPokemon['sprites']['front_default'];
+    pokemonImg.push(getImgOfPokemon);
+    console.log('Loaded Pokémon', currentPokemon);
+    checkExistingArray();
+}
+
+/* Get specific pokemon values out of Poke API JSON part 2 */
+function getPokmonJSONValuesPart2() {
     getFirstTypeOfPokemon = currentPokemon['types'][0]['type']['name'];
+    cardBackgroundColor.push(getFirstTypeOfPokemon);
     getHeight = currentPokemon['height'];
     height.push(getHeight);
     getWeight = (currentPokemon['weight'] / 10).toFixed(0);
     weight.push(getWeight);
     getAbiliy = currentPokemon['abilities'][0]['ability']['name'];
     ability.push(getAbiliy);
-    pokemonId.push(getIdOfPokemon);
-    pokemonImg.push(getImgOfPokemon);
-    cardBackgroundColor.push(getFirstTypeOfPokemon);
-    console.log('Loaded Pokémon', currentPokemon);
+}
+
+/* Check if the second type array really exists */
+function checkExistingArray() {
     if (currentPokemon['types'][1] === undefined) {
         getSecondTypeOfPokemon = '';
         secondTypeOfPokemon.push(getSecondTypeOfPokemon);
@@ -750,90 +761,132 @@ function renderPokemonCards(i) {
     typeOneOfPokemon = getFirstTypeOfPokemon.toUpperCase();
     typeTwoOfPokemon = getSecondTypeOfPokemon.toUpperCase();
     renderPokemonCards.innerHTML += renderCard(i, typeOneOfPokemon, typeTwoOfPokemon);
-    if (typeTwoOfPokemon == '') {
-        document.getElementById(`pokemonTypeTwo${i}`).classList.remove('bgc-transparent', 'type-information');
-    }
+    removeTypeTwoClasslist(i);
     setBackgroundColor(i);
+}
+
+/* If there isn't a secon type, remove class list */
+function removeTypeTwoClasslist(i) {
+    if (typeTwoOfPokemon === '') {
+        document.getElementById(`pokemonTypeTwo${i}`).classList.remove('bgc-transparent', 'type-information');
+    } else if (secondTypeOfPokemon[i] === '') {
+        let typeTwoClasslist = document.getElementById(`typeTwoCard${i}`);
+        typeTwoClasslist.classList.remove('bgc-transparent', 'type-information');
+        typeTwoClasslist.classList.add('d-none', 'text-align-center');
+    }
 }
 
 /* Render pokemon card content */
 function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
     return /*html*/`
-    <div id="card${i}" class="poke-card border-small" onclick="openPokemonInfoCard(${i})">
-        <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
-        <div id="nameOfPokemon" class="text-style">${pokemonNames[i].toUpperCase()}</div>
-        <div class="flex space-betw">
-            <div id="type-container" class="flex flex-column">
-                <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
-                <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
+        <div id="card${i}" class="poke-card border-small" onclick="openPokemonInfoCard(${i})">
+            <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
+            <div id="nameOfPokemon" class="text-style">${pokemonNames[i].toUpperCase()}</div>
+            <div class="flex space-betw">
+                <div id="type-container" class="flex flex-column">
+                    <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
+                    <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
+                </div>
+                <div id="imgPokemon"><img class="img-size" src="${pokemonImg[i]}" alt="pokemon"></div>
             </div>
-            <div id="imgPokemon"><img class="img-size" src="${pokemonImg[i]}" alt="pokemon"></div>
-        </div>
-    </div >`;
+        </div >`;
 }
-
 
 /* Show detailed pokemon informations */
 function openPokemonInfoCard(i) {
     let k = true;
     let typeOne = cardBackgroundColor[i].toUpperCase();
     let typeTwo = secondTypeOfPokemon[i].toUpperCase();
-    console.log('Informationen abrufen');
     let infoContainer = document.getElementById('info-container');
     infoContainer.classList.remove('d-none');
     document.getElementById('pokedex').style = 'display: none;';
     infoContainer.innerHTML = renderPokemonInfoCard(i, typeOne, typeTwo);
-    if (secondTypeOfPokemon[i] === '') {
-        document.getElementById(`typeTwoCard${i}`).classList.remove('bgc-transparent', 'type-information');
-    }
+    removeTypeTwoClasslist(i);
     setBackgroundColor(i, k);
 }
 
 /* Render the info card when clicking on a pokemon card */
 function renderPokemonInfoCard(i, typeOne, typeTwo) {
     return /*html*/`
-    <div class="inner-info-container border-small">
-        <div id="info-card-top${i}" class="info-top-div p-around-8px"> 
-            <div class="flex space-betw p-around-8px">
-                <div onclick="removeInfoCard(${i})"><img class="icon-size p-around-4px" src="img/icons_back.png" alt="escape"></div>
-                <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px" src="img/icons8-heart-50.png" alt="escape"></div>
+        <div class="inner-info-container border-small">
+            <div id="info-card-top${i}" class="info-top-div p-around-8px"> 
+                ${infoCardTopSubdivFirst(i)}
+                ${infoCardTopSubdivSecond(i, typeOne, typeTwo)}
             </div>
-            <div class="flex space-betw p-around-8px">
-                <div class="flex flex-column">
+            <div class="inner-info-bottomDiv">
+                ${infoCardBottomSubdivFirst(i)}
+                ${infoCardBottomSubdivSecond()}
+                <div class="flex center">${infoCardBottomSubdivAbout(i)}</div>
+                <div>${infoCardBottomSubdivBaseStats(i)}</div>
+            </div>
+        </div>`;
+}
+
+/* Pokemon info top-container top part */
+function infoCardTopSubdivFirst(i) {
+    return /*html*/`     
+        <div class="flex space-betw p-around-8px">
+            <div onclick="removeInfoCard(${i})"><img class="icon-size p-around-4px" src="img/icons_back.png" alt="escape"></div>
+            <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px" src="img/icons8-heart-50.png" alt="escape"></div>
+        </div>`;
+}
+
+/* Pokemon info top-container bottom part */
+function infoCardTopSubdivSecond(i, typeOne, typeTwo) {
+    return /*html*/`
+        <div class="flex space-betw p-around-8px">
+            <div class="flex flex-column">
                 <div id="nameOfPokemon" class="text-style">${pokemonNames[i].toUpperCase()}</div>
                 <div id="type-container" class="flex">
                     <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOne}</div>
                     <div id="typeTwoCard${i}" class="bgc-transparent type-information p-around-8px margin-left-2px">${typeTwo}</div>
                 </div>
-                </div>
-                <div id="IdOfPokemon" class="p-around-8 text-style font-size-28px">#${pokemonId[i]}</div>
             </div>
-        </div>
+            <div id="IdOfPokemon" class="p-around-8 text-style font-size-28px">#${pokemonId[i]}</div>
+        </div>`;
+}
 
-        <div class="inner-info-bottomDiv">
-            <div class="flex center"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
-            <div class="flex space-betw p-around-8px margin-top-minus-48px">
-                <img id="previousPicture" class="icon-size p-around-4px" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
-                <img id="nextPicture" class="icon-size p-around-4px" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
+/* Pokemon info bottom-container top part */
+function infoCardBottomSubdivFirst(i) {
+    return /*html*/`
+        <div class="flex center"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
+        <div class="flex space-betw p-around-8px margin-top-minus-48px">
+            <img id="previousPicture" class="icon-size p-around-4px" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
+            <img id="nextPicture" class="icon-size p-around-4px" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
+        </div>`;
+}
+
+/* Pokemon info bottom-container bottom part */
+function infoCardBottomSubdivSecond() {
+    return /*html*/`
+        <div>
+            <div class="flex center">
+                <a class="p-around-8px text-style" href="#">ABOUT</a>
+                <a class="p-around-8px text-style" href="#">BASE STATS</a>
             </div>
-            <div>
-                <div class="flex center">
-                    <a class="p-around-8px text-style" href="#">ABOUT</a>
-                    <a class="p-around-8px text-style" href="#">BASE STATS</a>
-                </div>
-            </div>
-            <div id="pokemonAbout" class="p-around-8px">
-                <div class="p-lf-8px"><span>Height</span>&nbsp;<span class="margin-left-22px">${height[i]}"</span></div>
-                <div class="p-lf-8px"><span>Weight</span>&nbsp;<span class="margin-left-22px"></span>${weight[i]}kg</div>
-                <div class="p-lf-8px"><span>Ability</span>&nbsp;&nbsp;<span class="margin-left-22px"></span>${ability[i]}</div>
-            </div>
-            <div id="pokemonBaseStats"></div>
-        </div>
-    </div>`;
+        </div>`;
+}
+
+/* Pokemon info bottom-container bottom pokemon about part */
+function infoCardBottomSubdivAbout(i) {
+    return /*html*/`
+        <div id="pokemonAbout" class="p-around-8px">
+            <table>
+                <tr><td>Height:</td><td class="text-align-center">${height[i]}</td></tr>
+                <tr><td>Weight:</td><td class="text-align-center">${weight[i]}</td></tr>
+                <tr><td>Ability:</td><td class="text-align-center">${ability[i]}</td></tr>
+            </table>
+        </div>`;
+}
+
+/* Pokemon info bottom-container bottom pokemon base-stats part */
+function infoCardBottomSubdivBaseStats(i) {
+    return /*html*/`
+    `;
 }
 
 /* Hide info card, show all pokemon cards */
-function removeInfoCard(i) {
+function removeInfoCard() {
     document.getElementById('pokedex').style = '';
     let infoContainer = document.getElementById('info-container');
     infoContainer.classList.add('d-none');

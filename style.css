@@ -63,6 +63,8 @@ a {
     font-weight: 700;
 }
 
+.text-align-center { text-align: center; }
+
 .font-size-28px {
     font-size: 28px;
 }
@@ -210,6 +212,10 @@ h1 { font-size: 56px; }
 .inner-info-bottomDiv {
     border-radius: 22px;
     width: 100%;
+}
+
+td:nth-of-type(2) {
+    padding-left: 32px;
 }
 /* ---------------------------------------------- */
 
