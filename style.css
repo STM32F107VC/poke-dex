@@ -2,7 +2,10 @@ body {
     margin: 0;
     font-family: roboto;
     scroll-behavior: smooth;
-    height: 100vh;
+    background-image: url("img/pokemon_5.jpg");
+    background-repeat: no-repeat;    
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 /* Change scrollbar design */
@@ -72,6 +75,8 @@ body {
     align-items: center;
 }
 
+.flex-end { justify-content: flex-end; }
+
 .flex-column { flex-direction: column; }
 
 .space-betw { justify-content: space-between; }
@@ -111,8 +116,6 @@ body {
 
 /* Header section */
 .header {
-    position: sticky;
-    top: 0;
     height: 100px;
     justify-content: space-around;
     padding: 16px 24px;
@@ -122,7 +125,7 @@ body {
     border-top: none;
 }
 
-.sticky {
+.sticky-top {
     position: sticky;
     top: 0;
 }
@@ -147,10 +150,6 @@ h1 { font-size: 56px; }
 
 /* Content container with pokemon cards */
 #pokedex {
-    background-image: url("img/pokemon_5.jpg");
-    background-repeat: no-repeat;    
-    background-attachment: fixed;
-    background-size: cover;
     min-height: 50vh;
     color: white;
     display: flex;
@@ -174,7 +173,7 @@ h1 { font-size: 56px; }
 
 #nameOfPokemon { font-size: 24px; }
 
-.img-size {
+.img-pokemon-size {
     width: 96px;
     height: 96px;
 }
@@ -189,6 +188,11 @@ h1 { font-size: 56px; }
 /* ---------------------------------------------- */
 
 /* Style the pokemon info cards */
+#info-container {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
 .img-info-card-poke-size  {
     width: 250px;
     height: 250px;
@@ -220,6 +224,35 @@ td:nth-of-type(2) { padding-left: 32px; }
 .bars-width { width: 100%; }
 /* ---------------------------------------------- */
 
+/* Button section */
+.sticky-bottom {
+    position: sticky;
+    bottom: 10px;
+}
+
+.sticky-right {
+    position: sticky;
+    bottom: 10px;
+    margin-right: 10px;
+}
+
+.button {
+    color: white;
+    font-size: 16px;
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+.img-arrow-up-size {
+    width: 24px;
+    height: 24px;
+}
+
+#load-btn, #up-btn, #home:hover {
+    cursor: pointer;
+}
+/* ---------------------------------------------- */
+
 /* Define background color depending on pokemon types */
 .bgc-fighting { background-color: #CE3F6B; }
 .bgc-psychic { background-color: #F87074; }
@@ -242,7 +275,6 @@ td:nth-of-type(2) { padding-left: 32px; }
 .bgc-default { background-color: silver; }
 .bgc-transparent { background-color: rgba(0, 0, 0, 0.1); }
 .bgc-pokeGrey { background-color: #222224; }
-.bgc-bars-diagram { background-color: #888891; }
 /* ---------------------------------------------- */
 
 /* Media Queries */

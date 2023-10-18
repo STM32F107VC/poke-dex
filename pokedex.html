@@ -15,12 +15,22 @@
 
 </head>
 
-<body onload="init()">
-    <div class="sticky">
+<body id="top" onload="init()">
+    <div class="sticky-top">
         <div w3-include-html="header.html"></div>
     </div>
     <div id="pokedex"></div>
     <div id="info-container" class="d-none flex center p-around-22px"></div>
+
+    <div class="sticky-bottom flex center" onclick="loadMorePokemons()">
+        <button id="load-btn" class="bgc-pokeGrey button">Load Pokemons</button>
+    </div>
+
+    <div class="sticky-right flex flex-end">
+        <a href="#top"><button id="up-btn" class="bgc-pokeGrey button sticky-right">
+                <img class="img-arrow-up-size" src="img/arrow_up.png" alt="go up">
+            </button></a>
+    </div>
 </body>
 
 </html>
