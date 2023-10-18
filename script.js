@@ -790,6 +790,7 @@ function removeTypeTwoClasslistPart1(i) {
     }
 }
 
+/* If there isn't a second type, remove class list */
 function removeTypeTwoClasslistPart2(i) {
     if (secondTypeOfPokemon[i] === '') {
         let typeTwoClasslist = document.getElementById(`typeTwoCard${i}`);
@@ -821,6 +822,7 @@ function openPokemonInfoCard(i) {
     let typeTwo = secondTypeOfPokemon[i].toUpperCase();
     let infoContainer = document.getElementById('info-container');
     infoContainer.classList.remove('d-none');
+    infoContainer.classList.add('bgc-pokeGrey');
     document.getElementById('pokedex').style = 'display: none;';
     infoContainer.innerHTML = renderPokemonInfoCard(i, typeOne, typeTwo);
     removeTypeTwoClasslistPart2(i);
@@ -840,6 +842,7 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
                 ${infoCardBottomSubdivSecond()}
                 <div class="flex center d-none">${infoCardBottomSubdivAbout(i)}</div>
                 <div class="flex flex-column text-align-center p-around-8px" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
+                <div class="flex center font-size-12px">1. Hp 2. Attack 3. Defense 4. Spec. Attack 5. Spec. Defense 6. Speed</div>
             </div>
         </div>`;
 }
@@ -872,7 +875,7 @@ function infoCardTopSubdivSecond(i, typeOne, typeTwo) {
 function infoCardBottomSubdivFirst(i) {
     return /*html*/`
         <div class="flex center margin-top-minus-12px"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
-        <div class="flex space-betw p-around-8px margin-top-minus-48px">
+        <div class="flex space-betw p-around-8px margin-top-minus-62px">
             <img id="previousPicture" class="icon-size p-around-4px" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
             <img id="nextPicture" class="icon-size p-around-4px" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
         </div>`;
@@ -905,12 +908,12 @@ function infoCardBottomSubdivAbout(i) {
 function infoCardBottomSubdivBaseStats(i) {
     let maxPixelWidth = 150;
     return /*html*/`
-        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedHp[i] * 100 / maxPixelWidth}%">Hp</div>
-        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;Attack</span></div> 
-        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;Defense</span></div> 
-        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;Spec. Attack</span></div>
-        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;Spec. Defense</span></div>
-        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedSpeed[i] * 100 / maxPixelWidth}%"><span>&nbsp;Speed</span></div>`;
+        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedHp[i] * 100 / maxPixelWidth}%">1</div>
+        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;2</span></div> 
+        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;3</span></div> 
+        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;4</span></div>
+        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;5</span></div>
+        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedSpeed[i] * 100 / maxPixelWidth}%"><span>&nbsp;6</span></div>`;
 }
 
 /* Hide info card, show all pokemon cards */
@@ -926,9 +929,14 @@ function setBackgroundColor(i, k) {
     let bgColorClass = typeColors[getBackgroundColor] || 'bgc-default';
     let card = document.getElementById(`card${i}`);
     let infoCard = document.getElementById(`info-card-top${i}`);
+    let bars = document.getElementById('base-stats');
     if (k) {
         k = false;
         infoCard.classList.add(bgColorClass);
+        for (let j = 0; j < bars.children.length; j++) {
+            let child = bars.children[j];
+            child.classList.add(bgColorClass);
+        }
     } else { card.classList.add(bgColorClass); }
 }
 
@@ -988,17 +996,12 @@ function removeRedHeart(i) {
 function filterPokemons() {
     let search = document.getElementById('search').value;
     let container = document.getElementById("pokedex");
-    let infoContainer = document.getElementById('info-container');
-    infoContainer.innerHTML = '';
     container.innerHTML = '';
-    // container.classList.remove('d-none');
-    // infoContainer.classList.add('d-none');
     search = search.toLowerCase();
     for (let i = 0; i < pokemonNames.length; i++) {
         let name = pokemonNames[i];
         if (name.includes(search)) {
             renderPokemonCards(i);
-            console.log(name);
         } else if (search.value === '') {
             loadPokemon();
         }
