@@ -28,10 +28,10 @@ a {
 }
 /* ---------------------------------------------- */
 
-
-
 /* Pseudo Classes */
 .margin-zero { margin: 0; }
+
+.margin-top-minus-12px { margin-top: -12px; }
 
 .margin-top-minus-48px { margin-top: -48px; }
 
@@ -52,10 +52,6 @@ a {
 .flex {
     display: flex;
     align-items: center;
-}
-
-.flex-align-ites-start {
-    align-items: flex-start;
 }
 
 .flex-column { flex-direction: column; }
@@ -192,7 +188,6 @@ h1 { font-size: 56px; }
 #info-container {
     /* background-color: rgba(0, 0, 0, 0.1); */
     background-color: #222224;
-
 }
 
 .img-info-card-poke-size  {
@@ -212,7 +207,6 @@ h1 { font-size: 56px; }
     height: 600px;
     border-radius: 22px;
     background-color: white;
-
 }
 
 .inner-info-bottomDiv {
@@ -222,6 +216,14 @@ h1 { font-size: 56px; }
 
 td:nth-of-type(2) {
     padding-left: 32px;
+}
+
+.bars-diagram {
+    border-radius: 12px;
+}
+
+.bars-width {
+    width: 100%;
 }
 /* ---------------------------------------------- */
 

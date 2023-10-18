@@ -714,7 +714,7 @@ function init() {
 /* Fetch Pokemons */
 async function loadPokemon() {
     for (let i = 0; i < pokemonNames.length; i++) {
-        const namesOfPokemons = pokemonNames[i];
+        let namesOfPokemons = pokemonNames[i];
         convertPokemonNames = namesOfPokemons.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '');
         pokemonNames[i] = convertPokemonNames;
         console.log('Der Name vom Pokemon lautet:', convertPokemonNames);
@@ -779,15 +779,19 @@ function renderPokemonCards(i) {
     typeOneOfPokemon = getFirstTypeOfPokemon.toUpperCase();
     typeTwoOfPokemon = getSecondTypeOfPokemon.toUpperCase();
     renderPokemonCards.innerHTML += renderCard(i, typeOneOfPokemon, typeTwoOfPokemon);
-    removeTypeTwoClasslist(i);
+    removeTypeTwoClasslistPart1(i);
     setBackgroundColor(i);
 }
 
 /* If there isn't a second type, remove class list */
-function removeTypeTwoClasslist(i) {
+function removeTypeTwoClasslistPart1(i) {
     if (typeTwoOfPokemon === '') {
         document.getElementById(`pokemonTypeTwo${i}`).classList.remove('bgc-transparent', 'type-information');
-    } else if (secondTypeOfPokemon[i] === '') {
+    }
+}
+
+function removeTypeTwoClasslistPart2(i) {
+    if (secondTypeOfPokemon[i] === '') {
         let typeTwoClasslist = document.getElementById(`typeTwoCard${i}`);
         typeTwoClasslist.classList.remove('bgc-transparent', 'type-information');
         typeTwoClasslist.classList.add('d-none', 'text-align-center');
@@ -819,7 +823,7 @@ function openPokemonInfoCard(i) {
     infoContainer.classList.remove('d-none');
     document.getElementById('pokedex').style = 'display: none;';
     infoContainer.innerHTML = renderPokemonInfoCard(i, typeOne, typeTwo);
-    removeTypeTwoClasslist(i);
+    removeTypeTwoClasslistPart2(i);
     setBackgroundColor(i, k);
 }
 
@@ -834,8 +838,8 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
             <div class="inner-info-bottomDiv">
                 ${infoCardBottomSubdivFirst(i)}
                 ${infoCardBottomSubdivSecond()}
-                <div class="flex center">${infoCardBottomSubdivAbout(i)}</div>
-                <div class="flex flex-column flex-align-ites-start p-around-8px" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
+                <div class="flex center d-none">${infoCardBottomSubdivAbout(i)}</div>
+                <div class="flex flex-column text-align-center p-around-8px" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
             </div>
         </div>`;
 }
@@ -867,7 +871,7 @@ function infoCardTopSubdivSecond(i, typeOne, typeTwo) {
 /* Pokemon info bottom-container top part */
 function infoCardBottomSubdivFirst(i) {
     return /*html*/`
-        <div class="flex center"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
+        <div class="flex center margin-top-minus-12px"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
         <div class="flex space-betw p-around-8px margin-top-minus-48px">
             <img id="previousPicture" class="icon-size p-around-4px" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
             <img id="nextPicture" class="icon-size p-around-4px" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
@@ -877,7 +881,7 @@ function infoCardBottomSubdivFirst(i) {
 /* Pokemon info bottom-container bottom part */
 function infoCardBottomSubdivSecond() {
     return /*html*/`
-        <div>
+        <div class="margin-top-minus-12px">
             <div class="flex center">
                 <a class="p-around-8px text-style" href="#">ABOUT</a>
                 <a class="p-around-8px text-style" href="#">BASE STATS</a>
@@ -899,15 +903,14 @@ function infoCardBottomSubdivAbout(i) {
 
 /* Pokemon info bottom-container bottom pokemon base-stats part */
 function infoCardBottomSubdivBaseStats(i) {
-    let maxPixelWidth = 130;
+    let maxPixelWidth = 150;
     return /*html*/`
-       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedHp[i] * 100 / maxPixelWidth}%">Hp</div>
-       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedAttack[i] * 100 / maxPixelWidth}%">Attack</div>
-       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedDefense[i] * 100 / maxPixelWidth}%">Defense</div> 
-       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedSpecialAttack[i] * 100 / maxPixelWidth}%">Special Attack</div>
-       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedSpecialDefense[i] * 100 / maxPixelWidth}%">Special Defense</div>
-       <div class="bgc-bars-diagram margin-bottom-2px" style="width: ${calculatedSpeed[i] * 100 / maxPixelWidth}%">Speed</div>
-    `;
+        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedHp[i] * 100 / maxPixelWidth}%">Hp</div>
+        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;Attack</span></div> 
+        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;Defense</span></div> 
+        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;Spec. Attack</span></div>
+        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;Spec. Defense</span></div>
+        <div class="bgc-bars-diagram margin-bottom-2px bars-diagram" style="width: ${calculatedSpeed[i] * 100 / maxPixelWidth}%"><span>&nbsp;Speed</span></div>`;
 }
 
 /* Hide info card, show all pokemon cards */
@@ -936,7 +939,6 @@ function setBarsBackgroundColor(i) {
     let bars = document.getElementById('base-stats');
     bars.children.classList.add(bgColorClass);
 }
-
 
 // Go to previous picture
 function previousImg(i) {
@@ -980,4 +982,25 @@ function removeRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
     heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="addReadHeart(${i})" src ="img/icons8-heart-50.png" alt="like">`;
+}
+
+/* Search pokemons with search field */
+function filterPokemons() {
+    let search = document.getElementById('search').value;
+    let container = document.getElementById("pokedex");
+    let infoContainer = document.getElementById('info-container');
+    infoContainer.innerHTML = '';
+    container.innerHTML = '';
+    // container.classList.remove('d-none');
+    // infoContainer.classList.add('d-none');
+    search = search.toLowerCase();
+    for (let i = 0; i < pokemonNames.length; i++) {
+        let name = pokemonNames[i];
+        if (name.includes(search)) {
+            renderPokemonCards(i);
+            console.log(name);
+        } else if (search.value === '') {
+            loadPokemon();
+        }
+    }
 }
