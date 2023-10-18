@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: roboto;
     scroll-behavior: smooth;
+    height: 100vh;
 }
 
 /* Change scrollbar design */
@@ -22,8 +23,22 @@ body {
 /* ---------------------------------------------- */
 
 /* a-tags */
-a {
+.a-tag {
+    color: #222224;
     text-decoration: none;
+    background-image: linear-gradient(#222224, #222224);
+    background-size: 0% 0.1em;
+    background-position-y: 100%;
+    background-position-x: 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.2s ease-in-out;
+}
+
+.a-tag:hover,
+.a-tag:focus,
+.a-tag:active {
+    background-size: 100% 0.1em;
+    background-position-x: 0%;
 }
 /* ---------------------------------------------- */
 
@@ -35,6 +50,8 @@ a {
 .margin-top-minus-62px { margin-top: -62px; }
 
 .margin-top-4px { margin-top: 4px; }
+
+.margin-top-16px { margin-top: 16px; }
 
 .margin-left-2px { margin-left: 2px; }
 

@@ -821,6 +821,7 @@ function openPokemonInfoCard(i) {
     let typeOne = cardBackgroundColor[i].toUpperCase();
     let typeTwo = secondTypeOfPokemon[i].toUpperCase();
     let infoContainer = document.getElementById('info-container');
+
     infoContainer.classList.remove('d-none');
     infoContainer.classList.add('bgc-pokeGrey');
     document.getElementById('pokedex').style = 'display: none;';
@@ -840,9 +841,9 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
             <div class="inner-info-bottomDiv">
                 ${infoCardBottomSubdivFirst(i)}
                 ${infoCardBottomSubdivSecond()}
-                <div class="flex center d-none">${infoCardBottomSubdivAbout(i)}</div>
-                <div class="flex flex-column text-align-center p-around-8px" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
-                <div class="flex center font-size-12px">1. Hp 2. Attack 3. Defense 4. Spec. Attack 5. Spec. Defense 6. Speed</div>
+                <div class="flex center margin-top-16px" id="about">${infoCardBottomSubdivAbout(i)}</div>
+                <div class="flex flex-column text-align-center p-around-8px d-none" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
+                <div class="flex center font-size-12px d-none" id="legend">1. Hp 2. Attack 3. Defense 4. Spec. Attack 5. Spec. Defense 6. Speed</div>
             </div>
         </div>`;
 }
@@ -886,8 +887,8 @@ function infoCardBottomSubdivSecond() {
     return /*html*/`
         <div class="margin-top-minus-12px">
             <div class="flex center">
-                <a class="p-around-8px text-style" href="#">ABOUT</a>
-                <a class="p-around-8px text-style" href="#">BASE STATS</a>
+                <a onclick="hideBaseStats()" class="p-around-8px text-style a-tag" href="#">ABOUT</a>
+                <a onclick="hideAbout()" class="p-around-8px text-style a-tag" href="#">BASE STATS</a>
             </div>
         </div>`;
 }
@@ -921,6 +922,20 @@ function removeInfoCard() {
     document.getElementById('pokedex').style = '';
     let infoContainer = document.getElementById('info-container');
     infoContainer.classList.add('d-none');
+}
+
+/* Hide about pokemon section */
+function hideAbout() {
+    document.getElementById('about').classList.add('d-none');
+    document.getElementById('base-stats').classList.remove('d-none');
+    document.getElementById('legend').classList.remove('d-none');
+}
+
+/* Hide base-stats pokemon section */
+function hideBaseStats() {
+    document.getElementById('about').classList.remove('d-none');
+    document.getElementById('base-stats').classList.add('d-none');
+    document.getElementById('legend').classList.add('d-none');
 }
 
 /* Set background-color of pokemon card depending on pokemon type */
