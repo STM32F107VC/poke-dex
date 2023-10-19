@@ -304,6 +304,10 @@ td:nth-of-type(2) { padding-left: 32px; }
         width: 80px;
         height: 80px;
     }
+
+    #load-all-btn {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 340px) {

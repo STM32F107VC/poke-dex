@@ -1,3 +1,10 @@
+/*  Made by: Sydney Bär
+    Project started on: 05.10.2023
+    Project completed on: 19.10.2023
+    Project changed on: 
+    Purpose: learning
+*/
+
 /* Declare global variables */
 let convertPokemonNames;
 let url;
@@ -17,7 +24,7 @@ let maxPixelWidth = 300;
 let startValue = 30;
 let showMorePokemons = 30;
 let i = 0;
-let maxAvailablePokemons = 919;
+let maxAvailablePokemons = 1010;
 let id = 0;
 
 /* Declare arrays */
@@ -69,15 +76,23 @@ function init() {
 async function loadPokemon() {
     for (i; i < startValue; i++) {
         id += 1;
-        url = ('https://pokeapi.co/api/v2/pokemon/' + id);
-        response = await fetch(url);
-        currentPokemon = await response.json();
-        pokemonNames.push(currentPokemon['name']);
-        console.log(currentPokemon);
-        getPokemonJsonValuesPart1();
-        getPokmonJSONValuesPart2();
-        getAndCalculateBaseStats();
-        renderPokemonCards(i);
+        if (id <= maxAvailablePokemons) {
+            url = ('https://pokeapi.co/api/v2/pokemon/' + id);
+            response = await fetch(url);
+            currentPokemon = await response.json();
+            pokemonNames.push(currentPokemon['name']);
+            console.log(currentPokemon);
+            getPokemonJsonValuesPart1();
+            getPokmonJSONValuesPart2();
+            getAndCalculateBaseStats();
+            renderPokemonCards(i);
+        } else {
+            id = 0;
+            document.getElementById('load-btn').classList.add('d-none');
+            document.getElementById('load-all-btn').classList.add('d-none');
+            document.getElementById('loadPokemonContainer').classList.remove('space-betw');
+            document.getElementById('loadPokemonContainer').classList.add('flex-end');
+        }
     }
 }
 
@@ -89,6 +104,10 @@ function loadMorePokemons() {
 
 /* Load all pokemons */
 function loadAllPokemons() {
+    document.getElementById('load-btn').classList.add('d-none');
+    document.getElementById('load-all-btn').classList.add('d-none');
+    document.getElementById('loadPokemonContainer').classList.remove('space-betw');
+    document.getElementById('loadPokemonContainer').classList.add('flex-end');
     startValue = maxAvailablePokemons;
     loadPokemon();
 }
