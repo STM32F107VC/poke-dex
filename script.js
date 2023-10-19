@@ -14,9 +14,11 @@ let getHeight;
 let getWeight;
 let getAbiliy;
 let maxPixelWidth = 300;
-startValue = 30;
+let startValue = 30;
+let showMorePokemons = 30;
 let i = 0;
 let maxAvailablePokemons = 919;
+let id = 0;
 
 /* Declare arrays */
 let compareBackgroundColor = ['fighting', 'psychic', 'poison', 'dragon', 'ghost', 'dark', 'ground', 'fire', 'fairy', 'water', 'flying', 'normal', 'rock', 'electric', 'bug', 'grass', 'ice', 'steel'];
@@ -66,8 +68,7 @@ function init() {
 /* Fetch Pokemons */
 async function loadPokemon() {
     for (i; i < startValue; i++) {
-        let id = i;
-        if (i == 0) { id += 1; }
+        id += 1;
         url = ('https://pokeapi.co/api/v2/pokemon/' + id);
         response = await fetch(url);
         currentPokemon = await response.json();
@@ -82,12 +83,14 @@ async function loadPokemon() {
 
 /* Load 30 more pokemons */
 function loadMorePokemons() {
-    startValue += i;
-    if (startValue < maxAvailablePokemons) {
-        loadPokemon();
-    } else {
-        alert('All Pokemons are loaded.');
-    }
+    startValue += showMorePokemons;
+    loadPokemon();
+}
+
+/* Load all pokemons */
+function loadAllPokemons() {
+    startValue = maxAvailablePokemons;
+    loadPokemon();
 }
 
 /* Get specific pokemon out of Poke API JSON part 1 */
@@ -268,7 +271,7 @@ function infoCardBottomSubdivAbout(i) {
 
 /* Pokemon info bottom-container bottom pokemon base-stats part */
 function infoCardBottomSubdivBaseStats(i) {
-    let maxPixelWidth = 150;
+    let maxPixelWidth = 400;
     return /*html*/`
         <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedHp[i] * 100 / maxPixelWidth}%">1</div>
         <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;2</span></div> 
