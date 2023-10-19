@@ -16,6 +16,7 @@ let getAbiliy;
 let maxPixelWidth = 300;
 startValue = 30;
 let i = 0;
+let maxAvailablePokemons = 919;
 
 /* Declare arrays */
 let compareBackgroundColor = ['fighting', 'psychic', 'poison', 'dragon', 'ghost', 'dark', 'ground', 'fire', 'fairy', 'water', 'flying', 'normal', 'rock', 'electric', 'bug', 'grass', 'ice', 'steel'];
@@ -82,7 +83,11 @@ async function loadPokemon() {
 /* Load 30 more pokemons */
 function loadMorePokemons() {
     startValue += i;
-    loadPokemon();
+    if (startValue < maxAvailablePokemons) {
+        loadPokemon();
+    } else {
+        alert('All Pokemons are loaded.');
+    }
 }
 
 /* Get specific pokemon out of Poke API JSON part 1 */
