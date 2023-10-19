@@ -204,6 +204,7 @@ function openPokemonInfoCard(i) {
     let typeOne = cardBackgroundColor[i].toUpperCase();
     let typeTwo = secondTypeOfPokemon[i].toUpperCase();
     let infoContainer = document.getElementById('info-container');
+    document.getElementById('loadPokemonContainer').classList.add('d-none');
     infoContainer.classList.remove('d-none');
     infoContainer.classList.add('bgc-pokeGrey');
     document.getElementById('pokedex').style = 'display: none;';
@@ -225,7 +226,7 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
                 ${infoCardBottomSubdivSecond()}
                 <div class="flex center margin-top-16px" id="about">${infoCardBottomSubdivAbout(i)}</div>
                 <div class="flex flex-column text-align-center p-around-8px d-none" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
-                <div class="flex center font-size-12px d-none" id="legend">1. Hp 2. Attack 3. Defense 4. Spec. Attack 5. Spec. Defense 6. Speed</div>
+                <div class="flex center font-size-12px margin-top-minus-4px d-none" id="legend">1. Hp 2. Attack 3. Defense 4. Spec. Attack 5. Spec. Defense 6. Speed</div>
             </div>
         </div>`;
 }
@@ -302,6 +303,7 @@ function infoCardBottomSubdivBaseStats(i) {
 /* Hide info card, show all pokemon cards */
 function removeInfoCard() {
     document.getElementById('pokedex').style = '';
+    document.getElementById('loadPokemonContainer').classList.remove('d-none');
     let infoContainer = document.getElementById('info-container');
     infoContainer.classList.add('d-none');
 }

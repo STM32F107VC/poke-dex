@@ -22,14 +22,15 @@
     <div id="pokedex"></div>
     <div id="info-container" class="d-none flex center p-around-22px"></div>
 
-    <div class="sticky-bottom flex center" onclick="loadMorePokemons()">
-        <button id="load-btn" class="bgc-pokeGrey button">Load Pokemons</button>
-    </div>
-
-    <div class="sticky-right flex flex-end">
-        <a href="#top"><button id="up-btn" class="bgc-pokeGrey button sticky-right">
-                <img class="img-arrow-up-size" src="img/arrow_up.png" alt="go up">
-            </button></a>
+    <div id="loadPokemonContainer" class="sticky-bottom flex space-betw">
+        <div onclick="loadMorePokemons()">
+            <button id="load-btn" class="bgc-pokeGrey button">Load Pokemons</button>
+        </div>
+        <div>
+            <a href="#top"><button id="up-btn" class="bgc-pokeGrey button margin-right-8px">
+                    <img class="img-arrow-up-size" src="img/arrow_up.png" alt="go up">
+                </button></a>
+        </div>
     </div>
 </body>
 
