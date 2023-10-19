@@ -14,8 +14,8 @@ let getHeight;
 let getWeight;
 let getAbiliy;
 let maxPixelWidth = 300;
-let startValue = 0;
-let i;
+startValue = 30;
+let i = 0;
 
 /* Declare arrays */
 let compareBackgroundColor = ['fighting', 'psychic', 'poison', 'dragon', 'ghost', 'dark', 'ground', 'fire', 'fairy', 'water', 'flying', 'normal', 'rock', 'electric', 'bug', 'grass', 'ice', 'steel'];
@@ -62,28 +62,11 @@ function init() {
     loadPokemon();
 }
 
-// for (let i = 0; i < pokemonNames.length; i++) {
-//     let namesOfPokemons = pokemonNames[i];
-//     convertPokemonNames = namesOfPokemons.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '');
-//     pokemonNames[i] = convertPokemonNames;
-//     console.log('Der Name vom Pokemon lautet:', convertPokemonNames);
-//     url = ('https://pokeapi.co/api/v2/pokemon/' + convertPokemonNames);
-//     response = await fetch(url);
-//     currentPokemon = await response.json();
-//     console.log(currentPokemon);
-//     getPokemonJsonValuesPart1();
-//     getPokmonJSONValuesPart2();
-//     getAndCalculateBaseStats();
-//     renderPokemonCards(i);
-// }
-
 /* Fetch Pokemons */
 async function loadPokemon() {
-    for (i = startValue; i < 70; i++) {
+    for (i; i < startValue; i++) {
         let id = i;
-        if (i == 0) {
-            id += 1;
-        }
+        if (i == 0) { id += 1; }
         url = ('https://pokeapi.co/api/v2/pokemon/' + id);
         response = await fetch(url);
         currentPokemon = await response.json();
@@ -96,21 +79,11 @@ async function loadPokemon() {
     }
 }
 
-
-async function loadMorePokemons() {
-    for (i = startValue; i < startValue + 30; i++) {
-        let id = i;
-        url = ('https://pokeapi.co/api/v2/pokemon/' + id);
-        response = await fetch(url);
-        currentPokemon = await response.json();
-        pokemonNames.push(currentPokemon['name']);
-        getPokemonJsonValuesPart1();
-        getPokmonJSONValuesPart2();
-        getAndCalculateBaseStats();
-        renderPokemonCards(i);
-    }
+/* Load 30 more pokemons */
+function loadMorePokemons() {
+    startValue += i;
+    loadPokemon();
 }
-
 
 /* Get specific pokemon out of Poke API JSON part 1 */
 function getPokemonJsonValuesPart1() {
