@@ -1,8 +1,8 @@
 body {
     margin: 0;
-    font-family: roboto;
+    font-family: 'roboto';
     scroll-behavior: smooth;
-    background-image: url("img/pokemon_5.jpg");
+    background-image: url("../img/pokemon_5.jpg");
     background-repeat: no-repeat;    
     background-attachment: fixed;
     background-size: cover;
@@ -38,8 +38,8 @@ body {
 }
 
 .a-tag:hover,
-.a-tag:focus,
-.a-tag:active {
+.a-tag:active,
+.a-tag:focus {
     background-size: 100% 0.1em;
     background-position-x: 0%;
 }
