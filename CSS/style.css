@@ -257,9 +257,10 @@ td:nth-of-type(2) { padding-left: 32px; }
     height: 24px;
 }
 
-#load-btn, #up-btn, #home, .poke-card, .input:hover {
+.cursoir-point {
     cursor: pointer;
 }
+
 /* ---------------------------------------------- */
 
 /* Define background color depending on pokemon types */
