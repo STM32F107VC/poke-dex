@@ -23,8 +23,8 @@ let getAbiliy;
 let maxPixelWidth = 300;
 let startValue = 30;
 let showMorePokemons = 30;
-let i = 0;
 let maxAvailablePokemons = 1010;
+let i = 0;
 let id = 0;
 
 /* Declare arrays */
@@ -182,8 +182,6 @@ function removeTypeTwoClasslistPart2(i) {
     }
 }
 
-
-
 /* Show detailed pokemon informations */
 function openPokemonInfoCard(i) {
     let k = true;
@@ -195,6 +193,8 @@ function openPokemonInfoCard(i) {
     infoContainer.classList.add('bgc-pokeGrey');
     document.getElementById('pokedex').style = 'display: none;';
     infoContainer.innerHTML = renderPokemonInfoCard(i, typeOne, typeTwo);
+    if (i == 0) { removeArrowLeft('leftArrow'); }
+    else if (i == pokemonNames.length - 1) { removeArrowRight('rightArrow'); }
     removeTypeTwoClasslistPart2(i);
     setBackgroundColor(i, k);
 }
@@ -246,7 +246,7 @@ function setBarsBackgroundColor(i) {
     bars.children.classList.add(bgColorClass);
 }
 
-// Go to previous picture
+/* Go to previous picture */
 function previousImg(i) {
     if (!(i <= (pokemonNames.length - pokemonNames.length))) { // Check that i isn't smaller than array length
         i -= 1;
@@ -255,7 +255,7 @@ function previousImg(i) {
     }
 }
 
-// Go to next picture
+/* Go to next picture */
 function nextImg(i) {
     if (i < pokemonNames.length - 1) { // Check that i isn't bigger than array length 
         i += 1;
@@ -264,16 +264,16 @@ function nextImg(i) {
     }
 }
 
-// Hide left arrow if first picture is reached
+/* Hide left arrow if first picture is reached */
 function removeArrowLeft(leftArrow) {
-    let arrowBehindPrevious = document.getElementById('previousPicture');
-    if (leftArrow) { arrowBehindPrevious.classList.add('hideArrow'); }
+    let arrowHide = document.getElementById('previousPicture');
+    if (leftArrow) { arrowHide.classList.add('hideArrow'); }
 }
 
-// Hide right arrow if last picture is reached
+/* Hide right arrow if last picture is reached */
 function removeArrowRight(rightArrow) {
-    let arrowBehindNext = document.getElementById('nextPicture');
-    if (rightArrow) { arrowBehindNext.classList.add('hideArrow'); }
+    let arrowHide = document.getElementById('nextPicture');
+    if (rightArrow) { arrowHide.classList.add('hideArrow'); }
 }
 
 /* Add red heart for like */
@@ -300,8 +300,6 @@ function filterPokemons() {
         let name = pokemonNames[k];
         if (name.includes(search)) {
             renderPokemonCards(k);
-        } else if (search.value === '') {
-            loadPokemon();
         }
     }
 }

@@ -1,4 +1,3 @@
-
 /* Render pokemon card content */
 function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
     return /*html*/`
