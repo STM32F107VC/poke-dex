@@ -43,6 +43,7 @@ let calculatedDefense = [];
 let calculatedSpecialAttack = [];
 let calculatedSpecialDefense = [];
 let calculatedSpeed = [];
+let likedPokemons = [];
 
 /* JSON with pokemon types for changing cards background color */
 const typeColors = {
@@ -298,10 +299,6 @@ function filterPokemons() {
     search = search.toLowerCase();
     for (let k = 0; k < pokemonNames.length; k++) {
         let name = pokemonNames[k];
-        if (name.includes(search)) {
-            renderPokemonCards(k);
-        }
+        if (name.includes(search)) { renderPokemonCards(k); }
     }
 }
-
-
