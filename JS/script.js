@@ -1,8 +1,6 @@
 /*  Made by: Sydney Bär
     Project started on: 05.10.2023
     Project completed on: 19.10.2023
-    Project changed on: 
-    Purpose: learning
 */
 
 /* Declare global variables */
@@ -82,7 +80,6 @@ async function loadPokemon() {
             response = await fetch(url);
             currentPokemon = await response.json();
             pokemonNames.push(currentPokemon['name']);
-            console.log(currentPokemon);
             getPokemonJsonValuesPart1();
             getPokmonJSONValuesPart2();
             getAndCalculateBaseStats();
@@ -120,7 +117,6 @@ function getPokemonJsonValuesPart1() {
     pokemonId.push(getIdOfPokemon);
     getImgOfPokemon = currentPokemon['sprites']['front_default'];
     pokemonImg.push(getImgOfPokemon);
-    console.log('Loaded Pokémon', currentPokemon);
     checkExistingArray();
 }
 
