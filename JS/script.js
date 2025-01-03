@@ -81,9 +81,9 @@ async function loadPokemon() {
             currentPokemon = await response.json();
             pokemonNames.push(currentPokemon['name']);
             getPokemonJsonValuesPart1();
-            getPokmonJSONValuesPart2();
+            getPokmonJsonValuesPart2();
             getAndCalculateBaseStats();
-            renderPokemonCards(i);
+            renderPokemonCards(i); 
         } else {
             id = 0;
             document.getElementById('load-btn').classList.add('d-none');
@@ -121,7 +121,7 @@ function getPokemonJsonValuesPart1() {
 }
 
 /* Get specific pokemon values out of Poke API JSON part 2 */
-function getPokmonJSONValuesPart2() {
+function getPokmonJsonValuesPart2() {
     getFirstTypeOfPokemon = currentPokemon['types'][0]['type']['name'];
     cardBackgroundColor.push(getFirstTypeOfPokemon);
     getHeight = currentPokemon['height'];
@@ -295,6 +295,6 @@ function filterPokemons() {
     search = search.toLowerCase();
     for (let k = 0; k < pokemonNames.length; k++) {
         let name = pokemonNames[k];
-        if (name.includes(search)) { renderPokemonCards(k); }
+        if (name.includes(search)) renderPokemonCards(k);
     }
 }
