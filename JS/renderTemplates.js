@@ -2,14 +2,15 @@
 function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
     return /*html*/`
         <div id="card${i}" class="poke-card border-small cursoir-point" onclick="openPokemonInfoCard(${i})">
-            <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
-            <div id="nameOfPokemon" class="text-style">${pokemonNames[i].toUpperCase()}</div>
-            <div class="flex space-betw">
-                <div id="type-container" class="flex flex-column">
-                    <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
-                    <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
-                </div>
-                <div id="imgPokemon"><img class="img-pokemon-size" src="${pokemonImg[i]}" alt="pokemon"></div>
+        <img class="pokeball" src="img/half_pokeball.svg" alt="half pokeball">
+        <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
+        <div id="nameOfPokemon" class="text-style">• ${pokemonNames[i]} •</div>
+        <div class="flex space-betw">
+            <div id="type-container" class="flex flex-column">
+                <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
+                <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
+            </div>
+            <div id="imgPokemon"><img class="img-pokemon-size" src="${pokemonImg[i]}" alt="pokemon"></div>
             </div>
         </div >`;
 }
@@ -71,8 +72,8 @@ function infoCardBottomSubdivSecond() {
     return /*html*/`
         <div class="margin-top-minus-12px">
             <div class="flex center">
-                <span onclick="hideBaseStats()" class="p-around-8px text-style a-tag cursoir-point">ABOUT</span>
-                <span onclick="hideAbout()" class="p-around-8px text-style a-tag cursoir-point">BASE STATS</span>
+                <span onclick="hideBaseStats()" class="p-around-8px a-tag cursoir-point">ABOUT</span>
+                <span onclick="hideAbout()" class="p-around-8px a-tag cursoir-point">BASE STATS</span>
             </div>
         </div>`;
 }

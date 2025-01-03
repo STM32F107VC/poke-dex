@@ -154,8 +154,8 @@ body {
 }
 
 .text-style {
-  color: #222224;
-  font-weight: 700;
+  color: #e0dcdc;
+  font-weight: 400;
 }
 
 .text-align-center {
@@ -222,6 +222,7 @@ body {
     #030305
   );
   border: none;
+  box-shadow: 0px 59px 82px -1px rgba(64, 61, 64, 0.8);
 }
 
 .header > img {
@@ -255,6 +256,16 @@ h1 {
 /* ---------------------------------------------- */
 
 /* Content container with pokemon cards */
+.pokeball {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0 auto;
+  width: 175px;
+  height: 175px;
+}
+
 #pokedex {
   min-height: 50vh;
   color: white;
@@ -269,6 +280,7 @@ h1 {
 
 /* Style the pokemon cards */
 .poke-card {
+  position: relative;
   width: 200px;
   height: 150px;
   padding: 22px;
@@ -280,6 +292,7 @@ h1 {
 
 #IdOfPokemon {
   text-align: right;
+  font-weight: 700;
 }
 
 #nameOfPokemon {
@@ -296,7 +309,7 @@ h1 {
   margin-top: 2px;
   width: 70px;
   text-align: center;
-  color: #222224;
+  color: #e0dcdc;
 }
 /* ---------------------------------------------- */
 
@@ -323,6 +336,7 @@ h1 {
   height: 600px;
   border-radius: 22px;
   background-color: white;
+  /* color: black; */
 }
 
 .inner-info-bottomDiv {
@@ -369,61 +383,213 @@ td:nth-of-type(2) {
 
 /* Define background color depending on pokemon types */
 .bgc-fighting {
-  background-color: #ce3f6b;
+  /* background-color: #ce3f6b; */
+  background: linear-gradient(
+    to bottom,
+    #000000,
+    #331820,
+    #632639,
+    #973352,
+    #ce3f6b
+  );
 }
 .bgc-psychic {
-  background-color: #f87074;
+  /* background-color: #f87074; */
+  background: linear-gradient(
+    to bottom,
+    #000000,
+    #3b2026,
+    #763843,
+    #b5535d,
+    #f87074
+  );
 }
 .bgc-poison {
-  background-color: #ab6ac8;
+  /* background-color: #ab6ac8; */
+  background: linear-gradient(
+    to bottom,
+    #000000,
+    #341c27,
+    #613152,
+    #8a4a88,
+    #ab6ac8
+  );
 }
 .bgc-dragon {
-  background-color: #0c6ec5;
+  /* background-color: #0c6ec5; */
+  background: linear-gradient(
+    to bottom,
+    #000000,
+    #2c1825,
+    #482c51,
+    #4f4989,
+    #0c6ec5
+  );
 }
 .bgc-ghost {
-  background-color: #5367b2;
+  /* background-color: #5367b2; */
+  background: linear-gradient(
+    to bottom,
+    #000000,
+    #2a1923,
+    #482d4a,
+    #59467b,
+    #5367b2
+  );
 }
 .bgc-dark {
-  background-color: #5a5164;
+  /* background-color: #5a5164; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #1d181a,
+    #322930,
+    #473c49,
+    #5a5164
+  );
 }
 .bgc-ground {
-  background-color: #d97746;
+  /* background-color: #d97746; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #391e22,
+    #6f3635,
+    #a65342,
+    #d97746
+  );
 }
 .bgc-fire {
-  background-color: #fe9c55;
+  /* background-color: #fe9c55; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #422428,
+    #834440,
+    #c36c4e,
+    #fe9c55
+  );
 }
 .bgc-fairy {
-  background-color: #ec90e7;
+  /* background-color: #ec90e7; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #3e242f,
+    #784461,
+    #b3679f,
+    #ec90e7
+  );
 }
 .bgc-water {
-  background-color: #4d90d6;
+  /* background-color: #4d90d6; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #30202b,
+    #513e5c,
+    #606398,
+    #4d90d6
+  );
 }
 .bgc-flying {
-  background-color: #8ea6df;
+  /* background-color: #8ea6df; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #33262e,
+    #5c4a61,
+    #7d759d,
+    #8ea6df
+  );
 }
 .bgc-normal {
-  background-color: #9099a2;
+  /* background-color: #9099a2; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #292728,
+    #4b494e,
+    #6e6f77,
+    #9099a2
+  );
 }
 .bgc-rock {
-  background-color: #c9b68b;
+  /* background-color: #c9b68b; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #372b2a,
+    #6b534a,
+    #9d8169,
+    #c9b68b
+  );
 }
 .bgc-electric {
-  background-color: #f4d23b;
+  /* background-color: #f4d23b; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #4d2929,
+    #955239,
+    #d18b3b,
+    #f4d23b
+  );
 }
 .bgc-bug {
-  background-color: #93c32e;
+  /* background-color: #93c32e; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #452320,
+    #7e4922,
+    #9d8116,
+    #93c32e
+  );
 }
 .bgc-grass {
-  background-color: #65bb5e;
+  /* background-color: #65bb5e; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #3e231f,
+    #6c4a25,
+    #7f7f2d,
+    #65bb5e
+  );
 }
 .bgc-ice {
-  background-color: #77d1c3;
+  /* background-color: #77d1c3; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #342d37,
+    #4e5d74,
+    #5496a9,
+    #77d1c3
+  );
 }
 .bgc-steel {
-  background-color: #5b8ea1;
+  /* background-color: #5b8ea1; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #282227,
+    #424150,
+    #52657b,
+    #5b8ea1
+  );
 }
 .bgc-default {
-  background-color: silver;
+  /* background-color: #c0c0c0; */
+  background-image: linear-gradient(
+    to bottom,
+    #000000,
+    #2f2f2f,
+    #5b5b5b,
+    #8c8c8c,
+    #c0c0c0
+  );
 }
 .bgc-transparent {
   background-color: rgba(0, 0, 0, 0.1);

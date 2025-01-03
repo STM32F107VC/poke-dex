@@ -79,19 +79,29 @@ async function loadPokemon() {
             url = ('https://pokeapi.co/api/v2/pokemon/' + id);
             response = await fetch(url);
             currentPokemon = await response.json();
-            pokemonNames.push(currentPokemon['name']);
-            getPokemonJsonValuesPart1();
-            getPokmonJsonValuesPart2();
-            getAndCalculateBaseStats();
-            renderPokemonCards(i); 
+            let pokemonName = currentPokemon['name'].replace(/^./, char => char.toUpperCase());
+            pokemonNames.push(pokemonName);
+            getPokemonValues();
         } else {
             id = 0;
-            document.getElementById('load-btn').classList.add('d-none');
-            document.getElementById('load-all-btn').classList.add('d-none');
-            document.getElementById('loadPokemonContainer').classList.remove('space-betw');
-            document.getElementById('loadPokemonContainer').classList.add('flex-end');
+            changeClasses();
         }
     }
+}
+
+function getPokemonValues() {
+    getPokemonJsonValuesPart1();
+    getPokmonJsonValuesPart2();
+    getAndCalculateBaseStats();
+    renderPokemonCards(i);
+}
+
+/* Add or remove CSS classes */
+function changeClasses() {
+    document.getElementById('load-btn').classList.add('d-none');
+    document.getElementById('load-all-btn').classList.add('d-none');
+    document.getElementById('loadPokemonContainer').classList.remove('space-betw');
+    document.getElementById('loadPokemonContainer').classList.add('flex-end');
 }
 
 /* Load 30 more pokemons */
