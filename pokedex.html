@@ -17,7 +17,6 @@
 </head>
 
 <body id="top" onload="init()">
-    <h1></h1>
     <div class="sticky-top">
         <div w3-include-html="template/header.html"></div>
     </div>
@@ -26,11 +25,11 @@
 
     <div id="loadPokemonContainer" class="flex space-betw sticky-bottom">
         <div id="load-all-btn" onclick="loadAllPokemons()">
-            <button class="bgc-pokeGrey button margin-left-8px cursoir-point">Load all Pokemons</button>
+            <button class="bgc-pokeGrey button margin-left-8px cursoir-point d-none">Load all Pokemons</button>
         </div>
 
         <div id="load-btn" onclick="loadMorePokemons()">
-            <button class="bgc-pokeGrey button cursoir-point">Load Pokemons</button>
+            <button class="bgc-pokeGrey button cursoir-point">Load more pokemons...</button>
         </div>
 
         <div id="up-btn">

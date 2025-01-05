@@ -62,8 +62,8 @@ function infoCardBottomSubdivFirst(i) {
     return /*html*/`
         <div class="flex center margin-top-minus-12px"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
         <div class="flex space-betw p-around-8px margin-top-minus-62px">
-            <img id="previousPicture" class="icon-size p-around-4px cursoir-point" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
-            <img id="nextPicture" class="icon-size p-around-4px cursoir-point" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
+            <img id="previousPicture" class="icon-size p-around-4px cursoir-point" src="img/arrow_back.png" alt="backward" onclick="previousImg(${i})">
+            <img id="nextPicture" class="icon-size p-around-4px cursoir-point" src="img/arrow_next.png" alt="forward" onclick="nextImg(${i})">
         </div>`;
 }
 

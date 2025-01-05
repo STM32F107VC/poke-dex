@@ -1,7 +1,4 @@
-/*  Made by: Sydney Bär
-    Project started on: 05.10.2023
-    Project completed on: 19.10.2023
-*/
+/* Made by: Sydney Bär */
 
 /* Declare global variables */
 let convertPokemonNames;
@@ -73,19 +70,24 @@ function init() {
 
 /* Fetch Pokemons */
 async function loadPokemon() {
-    for (i; i < startValue; i++) {
-        id += 1;
-        if (id <= maxAvailablePokemons) {
-            url = ('https://pokeapi.co/api/v2/pokemon/' + id);
-            response = await fetch(url);
-            currentPokemon = await response.json();
-            let pokemonName = currentPokemon['name'].replace(/^./, char => char.toUpperCase());
-            pokemonNames.push(pokemonName);
-            getPokemonValues();
-        } else {
-            id = 0;
-            changeClasses();
+    try {
+        for (i; i < startValue; i++) {
+            id += 1;
+            if (id <= maxAvailablePokemons) {
+                url = ('https://pokeapi.co/api/v2/pokemon/' + id);
+                response = await fetch(url);
+                currentPokemon = await response.json();
+
+                let pokemonName = currentPokemon['name'].replace(/^./, char => char.toUpperCase());
+                pokemonNames.push(pokemonName);
+                getPokemonValues();
+            } else {
+                id = 0;
+                changeClasses();
+            }
         }
+    } catch (error) {
+        console.error('Not possible to fetch pokemons data from PokéAPI.');
     }
 }
 
@@ -302,9 +304,12 @@ function filterPokemons() {
     let search = document.getElementById('search').value;
     let container = document.getElementById("pokedex");
     container.innerHTML = '';
-    search = search.toLowerCase();
+    // lowerCase = search.toLowerCase();
     for (let k = 0; k < pokemonNames.length; k++) {
         let name = pokemonNames[k];
-        if (name.includes(search)) renderPokemonCards(k);
+
+        if (name.includes(search)) {
+            renderPokemonCards(k);
+        }
     }
 }
