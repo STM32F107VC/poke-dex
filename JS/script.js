@@ -1,7 +1,4 @@
-/*  Made by: Sydney Bär
-    Project started on: 05.10.2023
-    Project completed on: 19.10.2023
-*/
+/* Made by: Sydney Bär */
 
 /* Declare global variables */
 let convertPokemonNames;
@@ -73,25 +70,40 @@ function init() {
 
 /* Fetch Pokemons */
 async function loadPokemon() {
-    for (i; i < startValue; i++) {
-        id += 1;
-        if (id <= maxAvailablePokemons) {
-            url = ('https://pokeapi.co/api/v2/pokemon/' + id);
-            response = await fetch(url);
-            currentPokemon = await response.json();
-            pokemonNames.push(currentPokemon['name']);
-            getPokemonJsonValuesPart1();
-            getPokmonJSONValuesPart2();
-            getAndCalculateBaseStats();
-            renderPokemonCards(i);
-        } else {
-            id = 0;
-            document.getElementById('load-btn').classList.add('d-none');
-            document.getElementById('load-all-btn').classList.add('d-none');
-            document.getElementById('loadPokemonContainer').classList.remove('space-betw');
-            document.getElementById('loadPokemonContainer').classList.add('flex-end');
+    try {
+        for (i; i < startValue; i++) {
+            id += 1;
+            if (id <= maxAvailablePokemons) {
+                url = ('https://pokeapi.co/api/v2/pokemon/' + id);
+                response = await fetch(url);
+                currentPokemon = await response.json();
+
+                let pokemonName = currentPokemon['name'].replace(/^./, char => char.toUpperCase());
+                pokemonNames.push(pokemonName);
+                getPokemonValues();
+            } else {
+                id = 0;
+                changeClasses();
+            }
         }
+    } catch (error) {
+        console.error('Not possible to fetch pokemons data from PokéAPI.');
     }
+}
+
+function getPokemonValues() {
+    getPokemonJsonValuesPart1();
+    getPokmonJsonValuesPart2();
+    getAndCalculateBaseStats();
+    renderPokemonCards(i);
+}
+
+/* Add or remove CSS classes */
+function changeClasses() {
+    document.getElementById('load-btn').classList.add('d-none');
+    document.getElementById('load-all-btn').classList.add('d-none');
+    document.getElementById('loadPokemonContainer').classList.remove('space-betw');
+    document.getElementById('loadPokemonContainer').classList.add('flex-end');
 }
 
 /* Load 30 more pokemons */
@@ -121,7 +133,7 @@ function getPokemonJsonValuesPart1() {
 }
 
 /* Get specific pokemon values out of Poke API JSON part 2 */
-function getPokmonJSONValuesPart2() {
+function getPokmonJsonValuesPart2() {
     getFirstTypeOfPokemon = currentPokemon['types'][0]['type']['name'];
     cardBackgroundColor.push(getFirstTypeOfPokemon);
     getHeight = currentPokemon['height'];
@@ -277,14 +289,14 @@ function removeArrowRight(rightArrow) {
 function addReadHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="removeRedHeart(${i})" src ="img/icons8-heart-50-filled.png" alt="red heart">`;
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
 }
 
 /* Remove red heart for dislike */
 function removeRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="addReadHeart(${i})" src ="img/icons8-heart-50.png" alt="like">`;
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
 }
 
 /* Search pokemons with search field */
@@ -292,9 +304,12 @@ function filterPokemons() {
     let search = document.getElementById('search').value;
     let container = document.getElementById("pokedex");
     container.innerHTML = '';
-    search = search.toLowerCase();
+    // lowerCase = search.toLowerCase();
     for (let k = 0; k < pokemonNames.length; k++) {
         let name = pokemonNames[k];
-        if (name.includes(search)) { renderPokemonCards(k); }
+
+        if (name.includes(search)) {
+            renderPokemonCards(k);
+        }
     }
 }

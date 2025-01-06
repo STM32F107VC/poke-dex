@@ -2,14 +2,15 @@
 function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
     return /*html*/`
         <div id="card${i}" class="poke-card border-small cursoir-point" onclick="openPokemonInfoCard(${i})">
-            <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
-            <div id="nameOfPokemon" class="text-style">${pokemonNames[i].toUpperCase()}</div>
-            <div class="flex space-betw">
-                <div id="type-container" class="flex flex-column">
-                    <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
-                    <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
-                </div>
-                <div id="imgPokemon"><img class="img-pokemon-size" src="${pokemonImg[i]}" alt="pokemon"></div>
+        <img class="pokeball" src="img/half_pokeball.svg" alt="half pokeball">
+        <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
+        <div id="nameOfPokemon" class="text-style">• ${pokemonNames[i]} •</div>
+        <div class="flex space-betw">
+            <div id="type-container" class="flex flex-column">
+                <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
+                <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
+            </div>
+            <div id="imgPokemon"><img class="img-pokemon-size" src="${pokemonImg[i]}" alt="pokemon"></div>
             </div>
         </div >`;
 }
@@ -37,7 +38,7 @@ function infoCardTopSubdivFirst(i) {
     return /*html*/`     
         <div class="flex space-betw p-around-8px">
             <div onclick="removeInfoCard(${i})"><img class="icon-size p-around-4px cursoir-point" src="img/icons_back.png" alt="escape"></div>
-            <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px cursoir-point" src="img/icons8-heart-50.png" alt="escape"></div>
+            <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px cursoir-point" src="img/heart_white.png" alt="escape"></div>
         </div>`;
 }
 
@@ -46,7 +47,7 @@ function infoCardTopSubdivSecond(i, typeOne, typeTwo) {
     return /*html*/`
         <div class="flex space-betw p-around-8px">
             <div class="flex flex-column">
-                <div id="nameOfPokemon" class="text-style">${pokemonNames[i].toUpperCase()}</div>
+                <div id="nameOfPokemon" class="text-style">• ${pokemonNames[i]} •</div>
                 <div id="type-container" class="flex">
                     <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOne}</div>
                     <div id="typeTwoCard${i}" class="bgc-transparent type-information p-around-8px margin-left-2px">${typeTwo}</div>
@@ -61,8 +62,8 @@ function infoCardBottomSubdivFirst(i) {
     return /*html*/`
         <div class="flex center margin-top-minus-12px"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
         <div class="flex space-betw p-around-8px margin-top-minus-62px">
-            <img id="previousPicture" class="icon-size p-around-4px cursoir-point" src="img/icons8-back-26.png" alt="backward" onclick="previousImg(${i})">
-            <img id="nextPicture" class="icon-size p-around-4px cursoir-point" src="img/icons8-forward-26.png" alt="forward" onclick="nextImg(${i})">
+            <img id="previousPicture" class="icon-size p-around-4px cursoir-point" src="img/arrow_back.png" alt="backward" onclick="previousImg(${i})">
+            <img id="nextPicture" class="icon-size p-around-4px cursoir-point" src="img/arrow_next.png" alt="forward" onclick="nextImg(${i})">
         </div>`;
 }
 
@@ -71,8 +72,8 @@ function infoCardBottomSubdivSecond() {
     return /*html*/`
         <div class="margin-top-minus-12px">
             <div class="flex center">
-                <span onclick="hideBaseStats()" class="p-around-8px text-style a-tag cursoir-point">ABOUT</span>
-                <span onclick="hideAbout()" class="p-around-8px text-style a-tag cursoir-point">BASE STATS</span>
+                <span onclick="hideBaseStats()" class="p-around-8px a-tag cursoir-point">ABOUT</span>
+                <span onclick="hideAbout()" class="p-around-8px a-tag cursoir-point">BASE STATS</span>
             </div>
         </div>`;
 }
