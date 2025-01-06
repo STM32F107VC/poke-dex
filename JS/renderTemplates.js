@@ -38,7 +38,7 @@ function infoCardTopSubdivFirst(i) {
     return /*html*/`     
         <div class="flex space-betw p-around-8px">
             <div onclick="removeInfoCard(${i})"><img class="icon-size p-around-4px cursoir-point" src="img/icons_back.png" alt="escape"></div>
-            <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px cursoir-point" src="img/icons8-heart-50.png" alt="escape"></div>
+            <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px cursoir-point" src="img/heart_white.png" alt="escape"></div>
         </div>`;
 }
 
@@ -47,7 +47,7 @@ function infoCardTopSubdivSecond(i, typeOne, typeTwo) {
     return /*html*/`
         <div class="flex space-betw p-around-8px">
             <div class="flex flex-column">
-                <div id="nameOfPokemon" class="text-style">${pokemonNames[i].toUpperCase()}</div>
+                <div id="nameOfPokemon" class="text-style">• ${pokemonNames[i]} •</div>
                 <div id="type-container" class="flex">
                     <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOne}</div>
                     <div id="typeTwoCard${i}" class="bgc-transparent type-information p-around-8px margin-left-2px">${typeTwo}</div>

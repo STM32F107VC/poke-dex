@@ -289,14 +289,14 @@ function removeArrowRight(rightArrow) {
 function addReadHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="removeRedHeart(${i})" src ="img/icons8-heart-50-filled.png" alt="red heart">`;
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
 }
 
 /* Remove red heart for dislike */
 function removeRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="addReadHeart(${i})" src ="img/icons8-heart-50.png" alt="like">`;
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
 }
 
 /* Search pokemons with search field */
