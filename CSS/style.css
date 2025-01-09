@@ -68,6 +68,7 @@ body {
 .a-tag:focus {
   background-size: 100% 0.1em;
   background-position-x: 0%;
+  font-weight: 700;
 }
 /* ---------------------------------------------- */
 
@@ -170,6 +171,10 @@ body {
   font-size: 28px;
 }
 
+.fw-500 {
+  font-weight: 500;
+}
+
 .border-small {
   border: 0.5px solid #222224;
 }
@@ -184,7 +189,7 @@ body {
 }
 
 .icon-size:hover {
-  background-color: rgb(0, 0, 0, 0.1);
+  background-color: rgb(0, 0, 0, 0.4);
   border-radius: 100%;
 }
 
@@ -314,8 +319,8 @@ h1 {
 }
 
 .img-info-card-poke-size {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   margin-top: -100px;
   image-rendering: pixelated;
 }
@@ -328,9 +333,8 @@ h1 {
 .inner-info-container {
   width: 400px;
   height: 600px;
-  border-radius: 22px;
+  border-radius: 26px;
   background-color: white;
-  /* color: black; */
 }
 
 .inner-info-bottomDiv {
@@ -348,6 +352,14 @@ td:nth-of-type(2) {
 
 .bars-width {
   width: 100%;
+}
+
+.specs {
+  display: flex;  
+}
+
+#base-stats {
+  width: -webkit-fill-available;
 }
 /* ---------------------------------------------- */
 
@@ -369,7 +381,7 @@ td:nth-of-type(2) {
   height: 24px;
 }
 
-.cursoir-point {
+.c-pointer {
   cursor: pointer;
 }
 

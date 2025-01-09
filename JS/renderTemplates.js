@@ -1,7 +1,7 @@
 /* Render pokemon card content */
 function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
     return /*html*/`
-        <div id="card${i}" class="poke-card border-small cursoir-point" onclick="openPokemonInfoCard(${i})">
+        <div id="card${i}" class="poke-card border-small c-pointer" onclick="openPokemonInfoCard(${i})">
         <img class="pokeball" src="img/half_pokeball.svg" alt="half pokeball">
         <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
         <div id="nameOfPokemon" class="text-style">• ${pokemonNames[i]} •</div>
@@ -27,8 +27,9 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
                 ${infoCardBottomSubdivFirst(i)}
                 ${infoCardBottomSubdivSecond()}
                 <div class="flex center margin-top-16px" id="about">${infoCardBottomSubdivAbout(i)}</div>
-                <div class="flex flex-column text-align-center p-around-8px d-none" id="base-stats">${infoCardBottomSubdivBaseStats(i)}</div>
-                <div class="flex center font-size-12px margin-top-minus-4px d-none" id="legend">1. Hp 2. Attack 3. Defense 4. Spec. Attack 5. Spec. Defense 6. Speed</div>
+                <div class="flex flex-column text-align-center p-around-8px d-none" id="base-stats">
+                    <canvas id="base-Stats"></canvas>
+                </div>
             </div>
         </div>`;
 }
@@ -37,8 +38,8 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
 function infoCardTopSubdivFirst(i) {
     return /*html*/`     
         <div class="flex space-betw p-around-8px">
-            <div onclick="removeInfoCard(${i})"><img class="icon-size p-around-4px cursoir-point" src="img/icons_back.png" alt="escape"></div>
-            <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px cursoir-point" src="img/heart_white.png" alt="escape"></div>
+            <div onclick="removeInfoCard(${i})"><img class="icon-size p-around-4px c-pointer" src="img/go_back.png" alt="escape"></div>
+            <div id="heart${i}"><img onclick="addReadHeart(${i})" class="icon-size p-around-4px c-pointer" src="img/heart_white.png" alt="escape"></div>
         </div>`;
 }
 
@@ -62,8 +63,8 @@ function infoCardBottomSubdivFirst(i) {
     return /*html*/`
         <div class="flex center margin-top-minus-12px"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
         <div class="flex space-betw p-around-8px margin-top-minus-62px">
-            <img id="previousPicture" class="icon-size p-around-4px cursoir-point" src="img/arrow_back.png" alt="backward" onclick="previousImg(${i})">
-            <img id="nextPicture" class="icon-size p-around-4px cursoir-point" src="img/arrow_next.png" alt="forward" onclick="nextImg(${i})">
+            <img id="previousPicture" class="icon-size p-around-4px c-pointer" src="img/arrow_back.png" alt="backward" onclick="previousImg(${i})">
+            <img id="nextPicture" class="icon-size p-around-4px c-pointer" src="img/arrow_next.png" alt="forward" onclick="nextImg(${i})">
         </div>`;
 }
 
@@ -72,8 +73,8 @@ function infoCardBottomSubdivSecond() {
     return /*html*/`
         <div class="margin-top-minus-12px">
             <div class="flex center">
-                <span onclick="hideBaseStats()" class="p-around-8px a-tag cursoir-point">ABOUT</span>
-                <span onclick="hideAbout()" class="p-around-8px a-tag cursoir-point">BASE STATS</span>
+                <span onclick="hideBaseStats()" class="p-around-8px fw-500 a-tag c-pointer">ABOUT</span>
+                <span onclick="hideAbout()" class="p-around-8px fw-500 a-tag c-pointer">BASE STATS</span>
             </div>
         </div>`;
 }
@@ -88,16 +89,4 @@ function infoCardBottomSubdivAbout(i) {
                 <tr><td>Ability:</td><td class="text-align-center">${ability[i]}</td></tr>
             </table>
         </div>`;
-}
-
-/* Pokemon info bottom-container bottom pokemon base-stats part */
-function infoCardBottomSubdivBaseStats(i) {
-    let maxPixelWidth = 400;
-    return /*html*/`
-        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedHp[i] * 100 / maxPixelWidth}%">1</div>
-        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;2</span></div> 
-        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;3</span></div> 
-        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialAttack[i] * 100 / maxPixelWidth}%"><span>&nbsp;4</span></div>
-        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedSpecialDefense[i] * 100 / maxPixelWidth}%"><span>&nbsp;5</span></div>
-        <div class="margin-bottom-2px bars-diagram" style="width: ${calculatedSpeed[i] * 100 / maxPixelWidth}%"><span>&nbsp;6</span></div>`;
 }
