@@ -71,15 +71,11 @@ function init() {
 /* Fetch Pokemons */
 async function loadPokemon() {
     try {
+        fetchPokemons();
         for (i; i < startValue; i++) {
             id += 1;
             if (id <= maxAvailablePokemons) {
-                url = ('https://pokeapi.co/api/v2/pokemon/' + id);
-                response = await fetch(url);
-                currentPokemon = await response.json();
-
-                let pokemonName = currentPokemon['name'].replace(/^./, char => char.toUpperCase());
-                pokemonNames.push(pokemonName);
+                await fetchPokemons();
                 getPokemonValues();
             } else {
                 id = 0;
@@ -91,6 +87,16 @@ async function loadPokemon() {
     }
 }
 
+/* Fetch pokemons from Poké-API and save name to pokemonNames array */
+async function fetchPokemons() {
+    url = ('https://pokeapi.co/api/v2/pokemon/' + id);
+    response = await fetch(url);
+    currentPokemon = await response.json();
+    let pokemonName = currentPokemon['name'].replace(/^./, char => char.toUpperCase());
+    pokemonNames.push(pokemonName);
+}
+
+/* Call functions to get informations about the pokemons */
 function getPokemonValues() {
     getPokemonJsonValuesPart1();
     getPokmonJsonValuesPart2();
@@ -127,7 +133,7 @@ function getPokemonJsonValuesPart1() {
     getPokemonName = currentPokemon['name'];
     getIdOfPokemon = currentPokemon['id'];
     pokemonId.push(getIdOfPokemon);
-    getImgOfPokemon = currentPokemon['sprites']['front_default'];
+    getImgOfPokemon = currentPokemon['sprites']['other']['official-artwork']['front_default'];
     pokemonImg.push(getImgOfPokemon);
     checkExistingArray();
 }
@@ -197,15 +203,73 @@ function openPokemonInfoCard(i) {
     let typeOne = cardBackgroundColor[i].toUpperCase();
     let typeTwo = secondTypeOfPokemon[i].toUpperCase();
     let infoContainer = document.getElementById('info-container');
-    document.getElementById('loadPokemonContainer').classList.add('d-none');
     infoContainer.classList.remove('d-none');
     infoContainer.classList.add('bgc-pokeGrey');
+    document.getElementById('loadPokemonContainer').classList.add('d-none');
     document.getElementById('pokedex').style = 'display: none;';
     infoContainer.innerHTML = renderPokemonInfoCard(i, typeOne, typeTwo);
-    if (i == 0) { removeArrowLeft('leftArrow'); }
-    else if (i == pokemonNames.length - 1) { removeArrowRight('rightArrow'); }
+    const c = document.getElementById('base-Stats');
+    addDataToChart(c, i);
+    removeArrow(i);
     removeTypeTwoClasslistPart2(i);
     setBackgroundColor(i, k);
+}
+
+/* Add pokemon stats to chart */
+function addDataToChart(c, i) {
+    (async function () {
+        const data = [
+            { ability: 'HP', count: calculatedHp[i] },
+            { ability: 'ATK', count: calculatedAttack[i] },
+            { ability: 'DEF', count: calculatedDefense[i] },
+            { ability: 'SPEC ATK', count: calculatedSpecialAttack[i] },
+            { ability: 'SPEC DEF', count: calculatedSpecialDefense[i] },
+            { ability: 'SPEED', count: calculatedSpeed[i] },
+        ];
+
+        new Chart(c, {
+            type: 'bar',
+            data: {
+                labels: data.map(row => row.ability),
+                datasets: [
+                    {
+                        label: 'Base stats',
+                        data: data.map(row => row.count),
+                        backgroundColor: [
+                            '#f50000',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderWidth: 1
+                    }
+                ],
+
+            },
+
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        }
+        );
+    })();
+}
+
+/* Remove arro left, when first pokecard and right when last one is clicked */
+function removeArrow(i) {
+    if (i == 0) {
+        removeArrowLeft('leftArrow');
+    }
+    else if (i == pokemonNames.length - 1) {
+        removeArrowRight('rightArrow');
+    }
 }
 
 /* Hide info card, show all pokemon cards */
@@ -220,14 +284,12 @@ function removeInfoCard() {
 function hideAbout() {
     document.getElementById('about').classList.add('d-none');
     document.getElementById('base-stats').classList.remove('d-none');
-    document.getElementById('legend').classList.remove('d-none');
 }
 
 /* Hide base-stats pokemon section */
 function hideBaseStats() {
     document.getElementById('about').classList.remove('d-none');
     document.getElementById('base-stats').classList.add('d-none');
-    document.getElementById('legend').classList.add('d-none');
 }
 
 /* Set background-color of pokemon card depending on pokemon type */
@@ -242,9 +304,11 @@ function setBackgroundColor(i, k) {
         infoCard.classList.add(bgColorClass);
         for (let j = 0; j < bars.children.length; j++) {
             let child = bars.children[j];
-            child.classList.add(bgColorClass);
+            // child.classList.add(bgColorClass);
         }
-    } else { card.classList.add(bgColorClass); }
+    } else {
+        card.classList.add(bgColorClass);
+    }
 }
 
 /* Set background color of bars */
@@ -289,14 +353,14 @@ function removeArrowRight(rightArrow) {
 function addReadHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px c-pointer" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
 }
 
 /* Remove red heart for dislike */
 function removeRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
+    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px c-pointer" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
 }
 
 /* Search pokemons with search field */
@@ -304,7 +368,7 @@ function filterPokemons() {
     let search = document.getElementById('search').value;
     let container = document.getElementById("pokedex");
     container.innerHTML = '';
-    // lowerCase = search.toLowerCase();
+
     for (let k = 0; k < pokemonNames.length; k++) {
         let name = pokemonNames[k];
 
