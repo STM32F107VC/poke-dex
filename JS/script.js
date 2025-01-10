@@ -71,6 +71,7 @@ function init() {
 /* Fetch Pokemons */
 async function loadPokemon() {
     try {
+        fetchPokemons();
         for (i; i < startValue; i++) {
             id += 1;
             if (id <= maxAvailablePokemons) {
@@ -132,7 +133,7 @@ function getPokemonJsonValuesPart1() {
     getPokemonName = currentPokemon['name'];
     getIdOfPokemon = currentPokemon['id'];
     pokemonId.push(getIdOfPokemon);
-    getImgOfPokemon = currentPokemon['sprites']['front_default'];
+    getImgOfPokemon = currentPokemon['sprites']['other']['official-artwork']['front_default'];
     pokemonImg.push(getImgOfPokemon);
     checkExistingArray();
 }
@@ -235,27 +236,27 @@ function addDataToChart(c, i) {
                         label: 'Base stats',
                         data: data.map(row => row.count),
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
+                            '#f50000',
                             'rgba(255, 159, 64, 0.2)',
                             'rgba(255, 205, 86, 0.2)',
                             'rgba(75, 192, 192, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(153, 102, 255, 0.2)',
                             'rgba(201, 203, 207, 0.2)'
-                          ],
-                          borderWidth: 2
+                        ],
+                        borderWidth: 1
                     }
                 ],
-                
+
             },
 
             options: {
                 scales: {
-                  y: {
-                    beginAtZero: true
-                  }
+                    y: {
+                        beginAtZero: true
+                    }
                 }
-              },
+            },
         }
         );
     })();
@@ -305,7 +306,7 @@ function setBackgroundColor(i, k) {
             let child = bars.children[j];
             // child.classList.add(bgColorClass);
         }
-    } else { 
+    } else {
         card.classList.add(bgColorClass);
     }
 }

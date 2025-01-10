@@ -2,7 +2,7 @@
 function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
     return /*html*/`
         <div id="card${i}" class="poke-card border-small c-pointer" onclick="openPokemonInfoCard(${i})">
-        <img class="pokeball" src="img/half_pokeball.svg" alt="half pokeball">
+        <img class="pokeball" draggable=false src="img/half_pokeball.svg" alt="half pokeball">
         <div id="IdOfPokemon" class="p-around-8 text-style">#${pokemonId[i]}</div>
         <div id="nameOfPokemon" class="text-style">• ${pokemonNames[i]} •</div>
         <div class="flex space-betw">
@@ -10,7 +10,7 @@ function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
                 <div id="pokemonTypeOne${i}" class="bgc-transparent type-information p-around-8px">${typeOneOfPokemon}</div>
                 <div id="pokemonTypeTwo${i}" class="bgc-transparent type-information p-around-8px">${typeTwoOfPokemon}</div>
             </div>
-            <div id="imgPokemon"><img class="img-pokemon-size" src="${pokemonImg[i]}" alt="pokemon"></div>
+            <div id="imgPokemon"><img class="img-pokemon-size" draggable=false src="${pokemonImg[i]}" alt="pokemon"></div>
             </div>
         </div >`;
 }
@@ -61,7 +61,7 @@ function infoCardTopSubdivSecond(i, typeOne, typeTwo) {
 /* Pokemon info bottom-container top part */
 function infoCardBottomSubdivFirst(i) {
     return /*html*/`
-        <div class="flex center margin-top-minus-12px"><img class="img-info-card-poke-size" src="${pokemonImg[i]}" alt="pokemon"></div>
+        <div class="flex center margin-top-minus-12px"><img class="img-info-card-poke-size" draggable=false src="${pokemonImg[i]}" alt="pokemon"></div>
         <div class="flex space-betw p-around-8px margin-top-minus-62px">
             <img id="previousPicture" class="icon-size p-around-4px c-pointer" src="img/arrow_back.png" alt="backward" onclick="previousImg(${i})">
             <img id="nextPicture" class="icon-size p-around-4px c-pointer" src="img/arrow_next.png" alt="forward" onclick="nextImg(${i})">
