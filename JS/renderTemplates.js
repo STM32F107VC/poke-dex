@@ -23,12 +23,12 @@ function renderPokemonInfoCard(i, typeOne, typeTwo) {
                 ${infoCardTopSubdivFirst(i)}
                 ${infoCardTopSubdivSecond(i, typeOne, typeTwo)}
             </div>
-            <div class="inner-info-bottomDiv">
+            <div class="inner-info-bottomDiv margin-top-minus-24px">
                 ${infoCardBottomSubdivFirst(i)}
                 ${infoCardBottomSubdivSecond()}
                 <div class="flex center margin-top-16px" id="about">${infoCardBottomSubdivAbout(i)}</div>
                 <div class="flex flex-column text-align-center p-around-8px d-none" id="base-stats">
-                    <canvas id="base-Stats"></canvas>
+                    <canvas style='width: unset; height: unset;' id="canvas"></canvas>
                 </div>
             </div>
         </div>`;
@@ -71,7 +71,7 @@ function infoCardBottomSubdivFirst(i) {
 /* Pokemon info bottom-container bottom part */
 function infoCardBottomSubdivSecond() {
     return /*html*/`
-        <div class="margin-top-minus-12px">
+        <div>
             <div class="flex center">
                 <span onclick="hideBaseStats()" class="p-around-8px fw-500 a-tag c-pointer">ABOUT</span>
                 <span onclick="hideAbout()" class="p-around-8px fw-500 a-tag c-pointer">BASE STATS</span>

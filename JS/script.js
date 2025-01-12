@@ -208,7 +208,7 @@ function openPokemonInfoCard(i) {
     document.getElementById('loadPokemonContainer').classList.add('d-none');
     document.getElementById('pokedex').style = 'display: none;';
     infoContainer.innerHTML = renderPokemonInfoCard(i, typeOne, typeTwo);
-    const c = document.getElementById('base-Stats');
+    const c = document.getElementById('canvas');
     addDataToChart(c, i);
     removeArrow(i);
     removeTypeTwoClasslistPart2(i);
@@ -236,13 +236,12 @@ function addDataToChart(c, i) {
                         label: 'Base stats',
                         data: data.map(row => row.count),
                         backgroundColor: [
-                            '#f50000',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 205, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(201, 203, 207, 0.2)'
+                            '#11FF00',
+                            '#FF0400',
+                            '#FFBB00',
+                            '#4400FF',
+                            '#DDFF00',
+                            '#EE00FF',
                         ],
                         borderWidth: 1
                     }
@@ -251,11 +250,56 @@ function addDataToChart(c, i) {
             },
 
             options: {
+                indexAxis: 'y',
+                barPercentage: .6,
+                borderRadius: 8,
                 scales: {
                     y: {
-                        beginAtZero: true
+
+                        display: true,
+
+                        grid: {
+                            color: 'rgba(0,0,0,0.3)',
+                            borderColor: 'grey',
+                            tickColor: 'grey',
+                            lineWidth: 1.5,
+                        },
+
+                        ticks: {
+                            backdropColor: 'rgba(221, 115, 8, 0.75)',
+
+                            major: {
+                                enabled: 'false'
+                            }
+                        },
+
+                        title: {
+                            color: 'green',
+                        },
+
+                    },
+
+                    x: {
+                        border: {
+
+                        },
+                        ticks: {
+
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.3)',
+                            borderColor: 'grey',
+                            tickColor: 'grey'
+                        },
                     }
-                }
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'linear',
+                },
+
+                responsive: true,
+                maintainAspectRatio: true,
             },
         }
         );
