@@ -85,6 +85,10 @@ body {
   margin-top: -12px;
 }
 
+.margin-top-minus-24px {
+  margin-top: -24px;
+}
+
 .margin-top-minus-62px {
   margin-top: -62px;
 }
@@ -322,7 +326,6 @@ h1 {
   width: 200px;
   height: 200px;
   margin-top: -100px;
-  image-rendering: pixelated;
 }
 
 .info-top-div {
@@ -358,8 +361,11 @@ td:nth-of-type(2) {
   display: flex;  
 }
 
-#base-stats {
-  width: -webkit-fill-available;
+canvas {
+  display: block;
+    width: 100%;    
+    height: auto;
+    max-width: 100%;
 }
 /* ---------------------------------------------- */
 
