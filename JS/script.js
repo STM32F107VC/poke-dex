@@ -329,12 +329,16 @@ function removeInfoCard() {
 function hideAbout() {
     document.getElementById('about').classList.add('d-none');
     document.getElementById('base-stats').classList.remove('d-none');
+    document.getElementById('info').classList.remove('highlight');
+    document.getElementById('stats').classList.add('highlight');
 }
 
 /* Hide base-stats pokemon section */
 function hideBaseStats() {
     document.getElementById('about').classList.remove('d-none');
     document.getElementById('base-stats').classList.add('d-none');
+    document.getElementById('info').classList.add('highlight');
+    document.getElementById('stats').classList.remove('highlight');
 }
 
 /* Set background-color of pokemon card depending on pokemon type */
@@ -398,14 +402,14 @@ function removeArrowRight(rightArrow) {
 function addReadHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px c-pointer" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
+    heart.innerHTML = /*html*/`<img class="icon-size draggable='false' p-around-4px c-pointer" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
 }
 
 /* Remove red heart for dislike */
 function removeRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size p-around-4px c-pointer" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
+    heart.innerHTML = /*html*/`<img class="icon-size draggable='false' p-around-4px c-pointer" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
 }
 
 /* Search pokemons with search field */

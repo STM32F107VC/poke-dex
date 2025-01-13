@@ -53,7 +53,8 @@ body {
 
 /* a-tags */
 .a-tag {
-  color: #222224;
+  /* color: #222224; */
+  color: #4b4b4b;
   text-decoration: none;
   background-image: linear-gradient(#222224, #222224);
   background-size: 0% 0.1em;
@@ -65,10 +66,12 @@ body {
 
 .a-tag:hover,
 .a-tag:active,
-.a-tag:focus {
+.a-tag:focus,
+.highlight {
+  color:rgb(0, 0, 0);
   background-size: 100% 0.1em;
   background-position-x: 0%;
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 /* ---------------------------------------------- */
 
@@ -177,6 +180,10 @@ body {
 
 .fw-500 {
   font-weight: 500;
+}
+
+.fw-700 {
+  font-weight: 700;
 }
 
 .border-small {
@@ -345,10 +352,6 @@ h1 {
   width: 100%;
 }
 
-td:nth-of-type(2) {
-  padding-left: 32px;
-}
-
 .bars-diagram {
   border-radius: 12px;
 }
@@ -358,14 +361,34 @@ td:nth-of-type(2) {
 }
 
 .specs {
-  display: flex;  
+  display: flex;
 }
 
 canvas {
   display: block;
-    width: 100%;    
-    height: auto;
-    max-width: 100%;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+table,
+tr {
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
+  border-collapse: collapse;
+  
+}
+
+table, tr:last-child {
+  border: none;
+}
+
+table tr td:first-child {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+table tr td {
+  padding: 8px 24px;
+  text-align: left;
 }
 /* ---------------------------------------------- */
 
@@ -390,7 +413,6 @@ canvas {
 .c-pointer {
   cursor: pointer;
 }
-
 /* ---------------------------------------------- */
 
 /* Define background color depending on pokemon types */
@@ -672,5 +694,10 @@ canvas {
 
   #header {
     flex-direction: column;
+  }
+
+  .img-info-card-poke-size {
+    width: 150px;
+    height: 150px;
   }
 }
