@@ -68,7 +68,7 @@ body {
 .a-tag:active,
 .a-tag:focus,
 .highlight {
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   background-size: 100% 0.1em;
   background-position-x: 0%;
   font-weight: 700 !important;
@@ -138,6 +138,10 @@ body {
 
 .p-lf-8px {
   padding: 0 8px;
+}
+
+.g-8px {
+  gap: 8px;
 }
 
 .flex {
@@ -375,10 +379,10 @@ table,
 tr {
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
   border-collapse: collapse;
-  
 }
 
-table, tr:last-child {
+table,
+tr:last-child {
   border: none;
 }
 
@@ -699,5 +703,60 @@ table tr td {
   .img-info-card-poke-size {
     width: 150px;
     height: 150px;
+  }
+}
+
+.loading-wrapper {
+  position: sticky;
+    top: 50%;
+    left: 50vw;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  animation: pulse 1s linear infinite;
+}
+
+.loader:after {
+  content: "";
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: scaleUp 1s linear infinite;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes pulse {
+  0%,
+  60%,
+  100% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.2);
   }
 }

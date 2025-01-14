@@ -75,6 +75,7 @@ async function loadPokemon() {
         fetchPokemons();
         for (i; i < startValue; i++) {
             id += 1;
+            console.log(i);
             if (id <= maxAvailablePokemons) {
                 await fetchPokemons();
                 getPokemonValues();

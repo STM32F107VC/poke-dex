@@ -72,7 +72,7 @@ function infoCardBottomSubdivFirst(i) {
 function infoCardBottomSubdivSecond() {
     return /*html*/`
         <div>
-            <div class="flex center">
+            <div class="flex center g-8px">
                 <span id="info" onclick="hideBaseStats()" class="p-around-8px fw-500 a-tag c-pointer highlight">ABOUT</span>
                 <span id="stats" onclick="hideAbout()" class="p-around-8px fw-500 a-tag c-pointer">BASE STATS</span>
             </div>
