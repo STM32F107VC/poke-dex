@@ -75,8 +75,11 @@ async function loadPokemon() {
         fetchPokemons();
         for (i; i < startValue; i++) {
             id += 1;
-            console.log(i);
+            console.log('Value of startValue: ' + startValue);
+            console.log('Value of id: ' + id);
+
             if (id <= maxAvailablePokemons) {
+                loadingSpinner();
                 await fetchPokemons();
                 getPokemonValues();
             } else {
@@ -96,6 +99,19 @@ async function fetchPokemons() {
     currentPokemon = await response.json();
     let pokemonName = currentPokemon['name'].replace(/^./, char => char.toUpperCase());
     pokemonNames.push(pokemonName);
+}
+
+/* Show loading spinner when fetching pokemons from PokéAPI and lay pokedex layer content container behind till all Pokemon have been fetched */
+function loadingSpinner() {
+    let spinner =  document.getElementById('loading-spinner');
+    let pokedex = document.getElementById('pokedex');
+    if (id < startValue) {
+        spinner.classList.add('loader');
+        pokedex.classList.add('pale');
+    } else {
+        spinner.classList.remove('loader');
+        pokedex.classList.remove('pale');
+    }
 }
 
 /* Call functions to get informations about the pokemons */
@@ -248,7 +264,7 @@ function addDataToChart(c, i) {
                         borderWidth: 1
                     }
                 ],
-        
+
             },
             options: {
                 indexAxis: 'y',
@@ -256,36 +272,36 @@ function addDataToChart(c, i) {
                 borderRadius: 8,
                 scales: {
                     y: {
-        
+
                         display: true,
-        
+
                         grid: {
                             color: 'rgba(0,0,0,0.3)',
                             borderColor: 'grey',
                             tickColor: 'grey',
                             lineWidth: 1.5,
                         },
-        
+
                         ticks: {
                             backdropColor: 'rgba(221, 115, 8, 0.75)',
-        
+
                             major: {
                                 enabled: 'false'
                             }
                         },
-        
+
                         title: {
                             color: 'green',
                         },
-        
+
                     },
-        
+
                     x: {
                         border: {
-        
+
                         },
                         ticks: {
-        
+
                         },
                         grid: {
                             color: 'rgba(0,0,0,0.3)',
@@ -298,12 +314,12 @@ function addDataToChart(c, i) {
                     duration: 1000,
                     easing: 'linear',
                 },
-        
+
                 responsive: true,
                 maintainAspectRatio: true,
             },
         }
-            
+
         );
     })();
 }

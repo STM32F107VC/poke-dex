@@ -17,35 +17,36 @@
 </head>
 
 <body id="top" onload="init();">
-    <div class="loading-wrapper">
-        <span class="loader"></span>
-    </div>
-
-    <div class="sticky-top">
-        <div w3-include-html="template/header.html"></div>
-    </div>
-
-    <div id="pokedex"></div>
-
-    <div id="info-container" class="d-none flex center p-around-22px"></div>
-
-    <div id="loadPokemonContainer" class="flex space-betw sticky-bottom">
-        <div id="load-all-btn" onclick="loadAllPokemons()">
-            <button class="bgc-pokeGrey button margin-left-8px c-pointer d-none">Load all Pokemons</button>
+        
+        <div class="sticky-top">
+            <div w3-include-html="template/header.html"></div>
+        </div>
+        
+        <div class="loading-wrapper">
+            <span id="loading-spinner" class=""></span>
         </div>
 
-        <div id="load-btn" onclick="loadMorePokemons()">
-            <button class="bgc-pokeGrey button c-pointer">Load more pokemons...</button>
-        </div>
+        <div id="pokedex"></div>
 
-        <div id="up-btn">
-            <a href="#top">
-                <button class="bgc-pokeGrey button margin-right-8px c-pointer">
-                    <img class="img-arrow-up-size" src="img/arrow_up.png" alt="go up">
-                </button>
-            </a>
+        <div id="info-container" class="d-none flex center p-around-22px"></div>
+
+        <div id="loadPokemonContainer" class="flex space-betw sticky-bottom">
+            <div id="load-all-btn" onclick="loadAllPokemons()">
+                <button class="bgc-pokeGrey button margin-left-8px c-pointer d-none">Load all Pokemons</button>
+            </div>
+
+            <div id="load-btn" onclick="loadMorePokemons()">
+                <button class="bgc-pokeGrey button c-pointer">Load more pokemons...</button>
+            </div>
+
+            <div id="up-btn">
+                <a href="#top">
+                    <button class="bgc-pokeGrey button margin-right-8px c-pointer">
+                        <img class="img-arrow-up-size" src="img/arrow_up.png" alt="go up">
+                    </button>
+                </a>
+            </div>
         </div>
-    </div>
 
 </body>
 

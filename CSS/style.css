@@ -325,6 +325,12 @@ h1 {
   text-align: center;
   color: #e0dcdc;
 }
+
+.pale {
+  opacity: 0.5;
+  position: relative;
+  z-index: -5;
+}
 /* ---------------------------------------------- */
 
 /* Style the pokemon info cards */
@@ -708,11 +714,11 @@ table tr td {
 
 .loading-wrapper {
   position: sticky;
-    top: 50%;
-    left: 50vw;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
+  top: 50%;
+  left: 50vw;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
 }
 
 .loader {
