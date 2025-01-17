@@ -12,7 +12,7 @@ function renderCard(i, typeOneOfPokemon, typeTwoOfPokemon) {
             </div>
             <div id="imgPokemon"><img class="img-pokemon-size" draggable='false' src="${pokemonImg[i]}" alt="pokemon"></div>
             </div>
-        </div >`;
+        </div>`;
 }
 
 /* Render the info card when clicking on a pokemon card */

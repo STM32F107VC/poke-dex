@@ -21,6 +21,8 @@ let showMorePokemons = 30;
 let maxAvailablePokemons = 1010;
 let i = 0;
 let id = 0;
+let chartJsOptions;
+
 
 /* Declare arrays */
 let compareBackgroundColor = ['fighting', 'psychic', 'poison', 'dragon', 'ghost', 'dark', 'ground', 'fire', 'fairy', 'water', 'flying', 'normal', 'rock', 'electric', 'bug', 'grass', 'ice', 'steel'];
@@ -75,9 +77,6 @@ async function loadPokemon() {
         fetchPokemons();
         for (i; i < startValue; i++) {
             id += 1;
-            console.log('Value of startValue: ' + startValue);
-            console.log('Value of id: ' + id);
-
             if (id <= maxAvailablePokemons) {
                 loadingSpinner();
                 await fetchPokemons();
@@ -103,7 +102,7 @@ async function fetchPokemons() {
 
 /* Show loading spinner when fetching pokemons from PokéAPI and lay pokedex layer content container behind till all Pokemon have been fetched */
 function loadingSpinner() {
-    let spinner =  document.getElementById('loading-spinner');
+    let spinner = document.getElementById('loading-spinner');
     let pokedex = document.getElementById('pokedex');
     if (id < startValue) {
         spinner.classList.add('loader');
@@ -245,87 +244,34 @@ function addDataToChart(c, i) {
             { ability: 'SPEED', count: calculatedSpeed[i] },
         ];
 
-        new Chart(c, {
-            type: 'bar',
-            data: {
-                labels: data.map(row => row.ability),
-                datasets: [
-                    {
-                        label: 'Base stats',
-                        data: data.map(row => row.count),
-                        backgroundColor: [
-                            '#11FF00',
-                            '#FF0400',
-                            '#FFBB00',
-                            '#4400FF',
-                            '#DDFF00',
-                            '#EE00FF',
-                        ],
-                        borderWidth: 1
-                    }
-                ],
-
-            },
-            options: {
-                indexAxis: 'y',
-                barPercentage: .6,
-                borderRadius: 8,
-                scales: {
-                    y: {
-
-                        display: true,
-
-                        grid: {
-                            color: 'rgba(0,0,0,0.3)',
-                            borderColor: 'grey',
-                            tickColor: 'grey',
-                            lineWidth: 1.5,
-                        },
-
-                        ticks: {
-                            backdropColor: 'rgba(221, 115, 8, 0.75)',
-
-                            major: {
-                                enabled: 'false'
-                            }
-                        },
-
-                        title: {
-                            color: 'green',
-                        },
-
-                    },
-
-                    x: {
-                        border: {
-
-                        },
-                        ticks: {
-
-                        },
-                        grid: {
-                            color: 'rgba(0,0,0,0.3)',
-                            borderColor: 'grey',
-                            tickColor: 'grey'
-                        },
-                    }
-                },
-                animation: {
-                    duration: 1000,
-                    easing: 'linear',
-                },
-
-                responsive: true,
-                maintainAspectRatio: true,
-            },
-        }
-
-        );
+        new Chart(c, createChartConfig(data));
     })();
+}
+
+function createChartConfig(data) {
+    return {
+        type: 'bar',
+        data: {
+            labels: data.map(row => row.ability),
+            datasets: [
+                {
+                    label: 'Base stats',
+                    data: data.map(row => row.count),
+                    backgroundColor: ['#11FF00','#FF0400','#FFBB00','#4400FF','#DDFF00','#EE00FF',],
+                    borderWidth: 1
+                }
+            ],
+        },
+        options:  CHART_JS_CONFIG.options,   
+    }
 }
 
 /* Remove arro left, when first pokecard and right when last one is clicked */
 function removeArrow(i) {
+    console.log('Amount of pokemons in array:' + pokemonNames.length);
+    console.log('Value of i' + i);
+    console.log('Value of id' + id);
+
     if (i == 0) {
         removeArrowLeft('leftArrow');
     }
@@ -333,6 +279,8 @@ function removeArrow(i) {
         removeArrowRight('rightArrow');
     }
 }
+
+/**pokemonNames.length - 1 */
 
 /* Hide info card, show all pokemon cards */
 function removeInfoCard() {
@@ -387,19 +335,23 @@ function setBarsBackgroundColor(i) {
 
 /* Go to previous picture */
 function previousImg(i) {
-    if (!(i <= (pokemonNames.length - pokemonNames.length))) { // Check that i isn't smaller than array length
+    if (!(i <= (pokemonNames.length - pokemonNames.length))) {
         i -= 1;
         openPokemonInfoCard(i);
-        if (i === (pokemonNames.length - pokemonNames.length)) { removeArrowLeft('leftArrow'); }
+        if (i === (pokemonNames.length - pokemonNames.length)) {
+            removeArrowLeft('leftArrow');
+        }
     }
 }
 
 /* Go to next picture */
 function nextImg(i) {
-    if (i < pokemonNames.length - 1) { // Check that i isn't bigger than array length 
+    if (i < pokemonNames.length - 1) {
         i += 1;
         openPokemonInfoCard(i);
-        if (i === pokemonNames.length - 1) { removeArrowRight('rightArrow'); }
+        if (i === pokemonNames.length - 1) {
+            removeArrowRight('rightArrow');
+        }
     }
 }
 

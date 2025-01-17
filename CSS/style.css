@@ -292,6 +292,7 @@ h1 {
   padding: 24px;
   gap: 16px;
 }
+
 /* ---------------------------------------------- */
 
 /* Style the pokemon cards */
@@ -301,7 +302,11 @@ h1 {
   height: 150px;
   padding: 22px;
   border-radius: 22px;
-  transition: transform 300ms ease-in-out;
+  transition: scale 125ms ease-in-out;
+}
+
+.poke-card:hover {
+  scale: 1.05;
 }
 
 #IdOfPokemon {
