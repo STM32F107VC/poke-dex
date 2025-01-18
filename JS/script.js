@@ -105,12 +105,24 @@ function loadingSpinner() {
     let spinner = document.getElementById('loading-spinner');
     let pokedex = document.getElementById('pokedex');
     if (id < startValue) {
+        toggleInputState(true);
         spinner.classList.add('loader');
         pokedex.classList.add('pale');
     } else {
+        toggleInputState(false);
         spinner.classList.remove('loader');
         pokedex.classList.remove('pale');
     }
+}
+
+/* When pokemons get fetched, disable search input field, when finished enable */
+function toggleInputState(state) {
+    let searchField = document.getElementById('search');
+    setTimeout(() => {
+        if (searchField == null || searchField) {
+            searchField.disabled = state;
+        } 
+    }, 5);
 }
 
 /* Call functions to get informations about the pokemons */
@@ -257,12 +269,12 @@ function createChartConfig(data) {
                 {
                     label: 'Base stats',
                     data: data.map(row => row.count),
-                    backgroundColor: ['#11FF00','#FF0400','#FFBB00','#4400FF','#DDFF00','#EE00FF',],
+                    backgroundColor: ['#11FF00', '#FF0400', '#FFBB00', '#4400FF', '#DDFF00', '#EE00FF',],
                     borderWidth: 1
                 }
             ],
         },
-        options:  CHART_JS_CONFIG.options,   
+        options: CHART_JS_CONFIG.options,
     }
 }
 
@@ -279,8 +291,6 @@ function removeArrow(i) {
         removeArrowRight('rightArrow');
     }
 }
-
-/**pokemonNames.length - 1 */
 
 /* Hide info card, show all pokemon cards */
 function removeInfoCard() {
@@ -372,6 +382,7 @@ function addReadHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
     heart.innerHTML = /*html*/`<img class="icon-size draggable='false' p-around-4px c-pointer" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
+    setToLocalStorage(i);
 }
 
 /* Remove red heart for dislike */
@@ -379,6 +390,15 @@ function removeRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
     heart.innerHTML = /*html*/`<img class="icon-size draggable='false' p-around-4px c-pointer" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
+}
+
+function setToLocalStorage(i) {
+    likedPokemons.push(i);
+    localStorage.setItem('likedPokemon', likedPokemons);
+}
+
+function getFromLocalStorage() {
+
 }
 
 /* Search pokemons with search field */

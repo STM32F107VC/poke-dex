@@ -22,7 +22,6 @@ const CHART_JS_CONFIG = {
                 title: {
                     color: 'green',
                 },
-
             },
             x: {
                 grid: {
