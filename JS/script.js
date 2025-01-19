@@ -69,6 +69,29 @@ const typeColors = {
 function init() {
     includeHTML();
     loadPokemon();
+    getFromLocalStorage();
+}
+
+function setToLocalStorage(i) {
+    let existingId = likedPokemons.includes(i);
+    if(!existingId) {
+        console.log('This id already exists.' + ' ' + existingId);
+        likedPokemons.push(i);
+        localStorage.setItem('likedPokemons', JSON.stringify({likedPokemons}));
+    }
+}
+
+function getFromLocalStorage() {
+    let likedPokemon = localStorage.getItem('likedPokemons');
+
+    if(likedPokemon) {
+        let parsedId = JSON.parse(likedPokemon);
+        console.log(parsedId);
+        likedPokemons.push(likedPokemon);
+        console.log(likedPokemons);
+    } else {
+        console.log('No liked pokemons');
+    }
 }
 
 /* Fetch Pokemons */
@@ -242,6 +265,31 @@ function openPokemonInfoCard(i) {
     removeArrow(i);
     removeTypeTwoClasslistPart2(i);
     setBackgroundColor(i, k);
+    findLikedPokemon(i);
+}
+
+function findLikedPokemon(i) {
+    // console.log('Find liked pokemons', i);
+    let idOflike = checkId(i);
+    if(idOflike == i) {
+        addRedHeart(i);
+    } else {
+        console.log('You have not given a like to this pokemon.');
+    }
+}
+
+function checkId(i) {
+    for (let l = 0; l < likedPokemons.length; l++) {
+        const like = likedPokemons[l];
+        if(i == like) {
+            console.log('Like found.' + ' ' + 'id: ', id + ' ' + 'like: ', like);
+            return +like;
+        } 
+        // else {
+        //     console.log('No liked pokemons found.');
+        //     return false;
+        // }
+    }
 }
 
 /* Add pokemon stats to chart */
@@ -280,9 +328,9 @@ function createChartConfig(data) {
 
 /* Remove arro left, when first pokecard and right when last one is clicked */
 function removeArrow(i) {
-    console.log('Amount of pokemons in array:' + pokemonNames.length);
-    console.log('Value of i' + i);
-    console.log('Value of id' + id);
+    // console.log('Amount of pokemons in array:' + pokemonNames.length);
+    // console.log('Value of i' + i);
+    // console.log('Value of id' + id);
 
     if (i == 0) {
         removeArrowLeft('leftArrow');
@@ -378,27 +426,18 @@ function removeArrowRight(rightArrow) {
 }
 
 /* Add red heart for like */
-function addReadHeart(i) {
+function addRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
     heart.innerHTML = /*html*/`<img class="icon-size draggable='false' p-around-4px c-pointer" onclick ="removeRedHeart(${i})" src ="img/heart_filled.png" alt="red heart">`;
-    setToLocalStorage(i);
+    setToLocalStorage(i); 
 }
 
 /* Remove red heart for dislike */
 function removeRedHeart(i) {
     let heart = document.getElementById(`heart${i}`);
     heart.innerHTML = '';
-    heart.innerHTML = /*html*/`<img class="icon-size draggable='false' p-around-4px c-pointer" onclick ="addReadHeart(${i})" src ="img/heart_white.png" alt="like">`;
-}
-
-function setToLocalStorage(i) {
-    likedPokemons.push(i);
-    localStorage.setItem('likedPokemon', likedPokemons);
-}
-
-function getFromLocalStorage() {
-
+    heart.innerHTML = /*html*/`<img class="icon-size draggable='false' p-around-4px c-pointer" onclick ="addRedHeart(${i})" src ="img/heart_white.png" alt="like">`;
 }
 
 /* Search pokemons with search field */

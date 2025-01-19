@@ -39,7 +39,7 @@ function infoCardTopSubdivFirst(i) {
     return /*html*/`     
         <div class="flex space-betw p-around-8px">
             <div onclick="removeInfoCard(${i})"><img draggable='false' class="icon-size p-around-4px c-pointer" src="img/go_back.png" alt="escape"></div>
-            <div id="heart${i}"><img draggable='false' onclick="addReadHeart(${i})" class="icon-size p-around-4px c-pointer" src="img/heart_white.png" alt="like"></div>
+            <div id="heart${i}"><img draggable='false' onclick="addRedHeart(${i})" class="icon-size p-around-4px c-pointer" src="img/heart_white.png" alt="like"></div>
         </div>`;
 }
 
